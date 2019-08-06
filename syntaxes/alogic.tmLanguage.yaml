@@ -1,0 +1,374 @@
+$schema: 'https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json'
+name: alogic
+patterns:
+  - include: "#include-directive"
+  - include: "#struct-decl"
+  - include: "#fsm-entity-decl"
+  - include: "#network-entity-decl"
+  - include: "#comment"
+repository:
+  include-directive:
+    patterns:
+      - name: keyword.alogic
+        match: \#include\s(.*)
+        captures:
+          1:
+            patterns:
+              - include: "#string"
+  struct-decl:
+    begin: (struct+)\s+(\w+)
+    end: \}
+    captures:
+      1:
+        name: keyword.alogic
+      2:
+        name: entity.name.type.alogic
+    contentName: meta.struct.alogic
+    patterns:
+      - begin: \{
+        end: .?(?=\})
+        contentName: meta.struct.body.alogic
+        patterns:
+          - include: "#struct-body"
+  struct-body:
+    patterns:
+      - include: "#field-decl"
+      - include: "#comment"
+  fsm-entity-decl:
+    begin: (fsm)\s+(\w+)
+    end: \}
+    captures:
+      1:
+        name: keyword.alogic
+      2:
+        name: entity.name.type.alogic
+    contentName: meta.fsm.alogic
+    patterns:
+      - begin: \{
+        end: .?(?=\})
+        contentName: meta.fsm.body.alogic
+        patterns:
+          - include: "#fsm-entity-body"
+  singleton-fsm-entity-decl:
+    begin: (new)\s+(fsm)\s+(\w+)
+    end: \}
+    captures:
+      1:
+        name: keyword.alogic
+      2:
+        name: keyword.alogic
+      3:
+        name: entity.name.type.alogic
+    contentName: meta.fsm.alogic
+    patterns:
+      - begin: \{
+        end: .?(?=\})
+        contentName: meta.fsm.body.alogic
+        patterns:
+          - include: "#fsm-entity-body"
+  fsm-entity-body:
+    patterns:
+      - include: "#common-entity-body"
+      - include: "#variable-decl"
+      - include: "#fence-block"
+      - include: "#function"
+  network-entity-decl:
+    begin: (network)\s+(\w+)\s*
+    end: \}
+    captures:
+      1:
+        name: keyword.alogic
+      2:
+        name: entity.name.type.alogic
+    contentName: meta.network.alogic
+    patterns:
+      - begin: \{
+        end: .?(?=\})
+        contentName: meta.network.body.alogic
+        patterns:
+          - include: "#network-entity-body"
+  network-entity-body:
+    patterns:
+      - include: "#common-entity-body"
+      - include: "#port-assignment"
+      - include: "#entity-instantiation"
+      - include: "#singleton-fsm-entity-decl"
+  common-entity-body:
+    patterns:
+      - include: "#param-or-const-decl"
+      - include: "#port-decl"
+      - include: "#comment"
+  port-decl:
+    patterns:
+      - include: "#in-port-decl"
+      - include: "#out-port-decl"
+  in-port-decl:
+    match: (in)\s+(.+\s)?(\w+)\s+(\w+);
+    captures:
+      1:
+        name: keyword.alogic
+      2:
+        patterns:
+          - include: "#flow-control-type"
+      3:
+        name: entity.name.type.alogic
+      4:
+        name: variable.alogic
+  out-port-decl:
+    match: (out)\s+(.+\s)?(\w+)\s+(\w+);
+    captures:
+      1:
+        name: keyword.alogic
+      2:
+        patterns:
+          # This becomes more involved if you want to support storage types
+          - include: "#flow-control-type"
+      3:
+        name: entity.name.type.alogic
+      4:
+        name: variable.alogic
+  flow-control-type:
+    name: keyword.alogic
+    match: sync(\s+(ready|accept))?
+  param-or-const-decl:
+    match: (param|const)\s+(\w+)\s+(\w+)\s*=\s*(.+);
+    captures:
+      1:
+        name: keyword.alogic
+      2:
+        name: entity.name.type.alogic
+      3:
+        name: variable.alogic
+      4:
+        patterns:
+          - include: "#literal"
+  variable-decl:
+    name: meta.variable.decl.alogic
+    patterns:
+     - include: "#field-decl"
+     - match: (\w+)\s+(\w+)\s*=\s*(.+);
+       captures:
+         1:
+           name: entity.name.type.alogic
+         2:
+           name: variable.alogic
+         3:
+           patterns:
+             - include: "#rvalue"
+  variable-assignment:
+    name: meta.variable.assignment.alogic
+    match: (\w+(?:\[.+\])?)\s*=\s*(.*);
+    captures:
+      1:
+        patterns:
+          - include: "#lvalue"
+      2:
+        patterns:
+          - include: "#rvalue"
+  rvalue:
+    patterns:
+      - include: "#method-invocation"
+      - include: "#lvalue"
+      - include: "#literal"
+  lvalue:
+    match: (\w+)(?:\[(.+)])?
+    captures:
+      1:
+        name: variable
+      2:
+        patterns:
+          - include: "#slice"
+  slice:
+    patterns:
+      - match: "(\\d+)([+-]?:)(\\d+)"
+        captures:
+          1:
+            name: constant.numeric.alogic
+          2:
+            name: keyword.operator
+          3:
+            name: constant.numeric.alogic
+      - match: \d+
+        name: constant.numeric.alogic
+  method-invocation:
+    match: (\w+)\.(\w+)\s*\((.*)\)
+    captures:
+      1:
+        name: variable.alogic
+      2:
+        name: entity.name.function
+      3:
+        pattern:
+          - include: "#rvalue"
+  # TODO Improve/add support for if, elseif, else
+  if-stmt:
+    match: (if)\s*\((.+)\)
+    captures:
+      1:
+        name: keyword.control.alogic
+      2:
+        patterns:
+          - include: "#rvalue"
+  while-stmt:
+    match: (while)\s*\((.+)\)
+    captures:
+      1:
+        name: keyword.control.alogic
+      2:
+        patterns:
+          - include: "#rvalue"
+  case-stmt:
+    begin: (case)\s*\((.+)\)
+    end: \}
+    beginCaptures:
+      1:
+        name: keyword.control.alogic
+      2:
+        patterns:
+          - include: "#rvalue"
+    contentName: meta.case.alogic
+    patterns:
+      - begin: \{
+        end: .?(?=\})
+        contentName: meta.case.body.alogic
+        patterns:
+          - include: "#case-stmt-arm"
+  case-stmt-arm:
+    begin: "(.+):"
+    end: \}
+    beginCaptures:
+      1:
+        patterns:
+          - include: "#literal"
+          - name: keyword.control.alogic
+            match: default
+    contentName: meta.case.arm.alogic
+    patterns:
+      - begin: \{
+        end: .?(?=\})
+        contentName: meta.case.arm.body.alogic
+        patterns:
+          - include: "#stmt-block-body"
+  field-decl:
+    match: (\w+)\s+(\w+);
+    captures:
+      1:
+        name: entity.name.type.alogic
+      2:
+        name: variable.alogic
+  fence-block:
+    begin: (fence)
+    end: \}
+    beginCaptures:
+      1:
+        name: keyword.alogic
+    contentName: meta.fenceblock.alogic
+    patterns:
+      - begin: \{
+        end: .?(?=\})
+        contentName: meta.fenceblock.body.alogic
+        patterns:
+          - include: "#stmt-block-body"
+  function:
+    begin: (void)\s+(\w+)\(\s*\)
+    end: \}
+    contentName: meta.function.alogic
+    beginCaptures:
+      1:
+        name: keyword.alogic
+      2:
+        name: entity.name.function.alogic
+    patterns:
+      - begin: \{
+        end: .?(?=\})
+        contentName: meta.function.body.alogic
+        patterns:
+          - include: "#stmt-block-body"
+  stmt-block:
+    begin: \{
+    end: \}
+    name: meta.scopeblock.alogic
+    patterns:
+      - include: "#stmt-block-body"
+  stmt-block-body:
+    patterns:
+      - include: "#stmt-block"
+      - include: "#variable-assignment"
+      - include: "#variable-decl"
+      - include: "#if-stmt"
+      - include: "#while-stmt"
+      - include: "#case-stmt"
+      - include: "#loop-statement"
+      - include: "#fence-statement"
+      - include: "#comment"
+  loop-statement:
+    match: (loop)
+    captures:
+      1:
+        name: keyword.control.alogic
+  fence-statement:
+    match: (fence);
+    captures:
+      1:
+        name: keyword.control.alogic
+  goto-statement:
+    match: (goto)\s+(\w+);
+    captures:
+      1:
+        name: keyword.control.alogic
+      2:
+        name: entity.name.function
+  entity-instantiation:
+    match: (\w+)\s*=\s*(new)\s*(\w+)\s*\(\s*\)
+    captures:
+      1:
+        name: variable.alogic
+      2:
+        name: keyword.alogic
+      3:
+        name: entity.name.type.alogic
+  port-assignment:
+    match: ([a-zA-Z0-9_\.]+)\s*->\s*([a-zA-Z0-9_\.]+);
+    captures:
+      1:
+        patterns:
+          - include: "#port-reference"
+      2:
+        patterns:
+          - include: "#port-reference"
+  port-reference:
+    match: (\w+)(?:\.(.+))?
+    captures:
+      1:
+        name: variable.alogic
+      2:
+        patterns:
+          - include: "#port-reference"
+  literal:
+    patterns:
+      - include: "#number"
+      - include: "#string"
+  string:
+    name: string.quoted.double.alogic
+    begin: '"'
+    end: '"'
+    patterns:
+      - name: constant.character.escape.alogic
+        match: \\.
+  number:
+    patterns:
+      - name: constant.numeric.alogic
+        match: \d*'b[01]+\b
+      - name: constant.numeric.alogic
+        match: \d*'d[0-9]+\b
+      - name: constant.numeric.alogic
+        match: \d*'h[0-9a-fA-F]+\b
+      - name: constant.numeric.alogic
+        match: \d+\b
+  comment:
+    patterns:
+      - name: comment
+        match: //.*
+      - begin: /\*
+        end: \*/
+scopeName: source.alogic

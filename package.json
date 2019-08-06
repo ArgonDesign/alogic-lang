@@ -1,0 +1,44 @@
+{
+    "name": "alogic-lang",
+    "displayName": "alogic-lang",
+    "description": "Visual Studio Code language support for alogic.",
+    "version": "0.1.0",
+    "engines": {
+        "vscode": "^1.36.0"
+    },
+    "publisher": "argon-design",
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "alogic",
+                "aliases": [
+                    "alogic",
+                    "alogic"
+                ],
+                "extensions": [
+                    ".alogic"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "alogic",
+                "scopeName": "source.alogic",
+                "path": "./syntaxes/alogic.tmLanguage.json"
+            }
+        ]
+    },
+    "scripts": {
+        "yaml-to-json": "npx js-yaml syntaxes/alogic.tmLanguage.yaml > syntaxes/alogic.tmLanguage.json",
+        "vscode:prepublish": "npm run yaml-to-json",
+        "package": "npx vsce package"
+    },
+    "devDependencies": {
+        "js-yaml": "^3.13.1",
+        "vsce": "^1.66.0"
+    }
+}

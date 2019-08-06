@@ -1,0 +1,60 @@
+#include "salmon"
+
+fsm cake
+{
+  param uint UNSIZED_BINARY = 'b01;
+  param uint SIZED_BINARY = 8'b01;
+  param uint UNSIZED_HEX = 'h0123456789aBcDeF;
+  param uint SIZED_HEX = 8'h0123456789aBcDeF;
+  param uint UNSIZED_DEC = 'd0123456789;
+  param uint SIZED_DEC = 8'd0123456789;
+  const uint FREE_NUMBER = 12345;
+  const string FREE_STRING = "string";
+  const thing_t other = cheese;
+
+  in the hood;
+  in sync cake_t cake;
+  in sync ready cake_t cake;
+  in sync accept cake_t cake;
+  in sync greedy cake_t cake;
+
+  out the hood;
+  out sync cake_t cake;
+  out sync ready cake_t cake;
+  out sync accept cake_t cake;
+  out sync greedy cake_t cake;
+
+  uint fun_times = 19;
+
+  void main()
+  {
+    if (cake) {
+
+    }
+
+    while (cheese) {
+
+    }
+
+    loop {
+
+    }
+
+    case (quack) {
+      12: {
+
+      }
+    }
+    // What are the things that go here?
+    fence;
+  }
+
+  fence
+  {
+    cheese = 1'b0;
+  }
+
+  fence {
+
+  }
+}
