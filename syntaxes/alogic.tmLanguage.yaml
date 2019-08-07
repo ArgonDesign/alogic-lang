@@ -9,14 +9,17 @@ patterns:
   - include: "#comment"
 repository:
   include-directive:
+    name: meta.include.alogic
     patterns:
-      - name: keyword.alogic
-        match: \#include\s(.*)
+      - match: (#include)\s(.*)
         captures:
           1:
+            name: keyword.alogic
+          2:
             patterns:
               - include: "#string"
   struct-decl:
+    name: meta.struct.alogic
     begin: (struct+)\s+(\w+)
     end: \}
     captures:
@@ -24,11 +27,10 @@ repository:
         name: keyword.alogic
       2:
         name: entity.name.type.alogic
-    contentName: meta.struct.alogic
+    contentName: meta.struct.body.alogic
     patterns:
       - begin: \{
         end: .?(?=\})
-        contentName: meta.struct.body.alogic
         patterns:
           - include: "#struct-body"
   struct-body:
@@ -36,6 +38,7 @@ repository:
       - include: "#field-decl"
       - include: "#comment"
   fsm-entity-decl:
+    name: meta.fsm.alogic
     begin: (fsm)\s+(\w+)
     end: \}
     captures:
@@ -43,14 +46,14 @@ repository:
         name: keyword.alogic
       2:
         name: entity.name.type.alogic
-    contentName: meta.fsm.alogic
+    contentName: meta.fsm.body.alogic
     patterns:
       - begin: \{
         end: .?(?=\})
-        contentName: meta.fsm.body.alogic
         patterns:
           - include: "#fsm-entity-body"
   singleton-fsm-entity-decl:
+    name: meta.fsm.alogic
     begin: (new)\s+(fsm)\s+(\w+)
     end: \}
     captures:
@@ -60,11 +63,10 @@ repository:
         name: keyword.alogic
       3:
         name: entity.name.type.alogic
-    contentName: meta.fsm.alogic
+    contentName: meta.fsm.body.alogic
     patterns:
       - begin: \{
         end: .?(?=\})
-        contentName: meta.fsm.body.alogic
         patterns:
           - include: "#fsm-entity-body"
   fsm-entity-body:
@@ -74,6 +76,7 @@ repository:
       - include: "#fence-block"
       - include: "#function"
   network-entity-decl:
+    name: meta.network.alogic
     begin: (network)\s+(\w+)\s*
     end: \}
     captures:
@@ -81,17 +84,17 @@ repository:
         name: keyword.alogic
       2:
         name: entity.name.type.alogic
-    contentName: meta.network.alogic
+    contentName: meta.network.body.alogic
     patterns:
       - begin: \{
         end: .?(?=\})
-        contentName: meta.network.body.alogic
         patterns:
         - include: "#common-entity-body"
         - include: "#port-assignment"
         - include: "#entity-instantiation"
         - include: "#singleton-fsm-entity-decl"
   verbatim-entity-decl:
+    name: meta.verbatim.alogic
     begin: (verbatim)\s+(entity)\s+(\w+)\s*
     end: \}
     captures:
@@ -101,18 +104,17 @@ repository:
         name: keyword.alogic
       3:
         name: entity.name.type.alogic
-    contentName: meta.verbatim.alogic
+    contentName: meta.verbatim.body.alogic
     patterns:
       - begin: \{
         end: .?(?=\})
-        contentName: meta.verbatim.body.alogic
         patterns:
           - include: "#common-entity-body"
           - include: "#verbatim-verilog-block"
   verbatim-verilog-block:
+    name: meta.verbatim.verilog.alogic
     begin: (verbatim)\s+(verilog)
     end: \}
-    contentName: meta.verbatim.verilog.alogic
     beginCaptures:
       1:
         name: keyword.alogic
@@ -134,6 +136,7 @@ repository:
       - include: "#in-port-decl"
       - include: "#out-port-decl"
   in-port-decl:
+    name: meta.port.in.alogic
     match: (in)\s+(.+\s)?(\w+)\s+(\w+);
     captures:
       1:
@@ -146,6 +149,7 @@ repository:
       4:
         name: variable.alogic
   out-port-decl:
+    name: meta.port.out.alogic
     match: (out)\s+(.+\s)?(\w+)\s+(\w+);
     captures:
       1:
@@ -162,6 +166,7 @@ repository:
     name: keyword.alogic
     match: sync(\s+(ready|accept))?
   param-or-const-decl:
+    name: meta.const.decl.alogic
     match: (param|const)\s+(\w+)\s+(\w+)\s*=\s*(.+);
     captures:
       1:
@@ -174,10 +179,10 @@ repository:
         patterns:
           - include: "#literal"
   variable-decl:
-    name: meta.variable.decl.alogic
     patterns:
      - include: "#field-decl"
-     - match: (\w+)\s+(\w+)\s*=\s*(.+);
+     - name: meta.variable.decl.alogic
+       match: (\w+)\s+(\w+)\s*=\s*(.+);
        captures:
          1:
            name: entity.name.type.alogic
@@ -185,7 +190,7 @@ repository:
            name: variable.alogic
          3:
            patterns:
-             - include: "#rvalue"
+             - include: "#expr"
   variable-assignment:
     name: meta.variable.assignment.alogic
     match: (\w+(?:\[.+\])?)\s*=\s*(.*);
@@ -195,13 +200,40 @@ repository:
           - include: "#lvalue"
       2:
         patterns:
-          - include: "#rvalue"
-  rvalue:
+          - include: "#expr"
+  expr:
     patterns:
+      - include: "#variable-assignment"
       - include: "#method-invocation"
-      - include: "#lvalue"
+      - name: meta.operation.unary
+        match: ([|&~])(.+)
+        captures:
+          1:
+            name: keyword.operator.alogic
+          2:
+            patterns:
+              - include: "#expr"
+      - name: meta.expr.parenthetical.alogic
+        match: \((.+)\)
+        captures:
+          1:
+            patterns:
+              - include: "#expr"
+      - name: meta.operation.binary
+        match: (.+)\s*(\+|-|\*|/|==|!=|>|>=|<|<=|&|\||^|&&|\|\|)\s*(.+)
+        captures:
+          1:
+            patterns:
+              - include: "#expr"
+          2:
+            name: keyword.operator.alogic
+          3:
+            patterns:
+              - include: "#expr"
       - include: "#literal"
+      - include: "#lvalue"
   lvalue:
+    name: meta.lvalue.alogic
     match: (\w+)(?:\[(.+)])?
     captures:
       1:
@@ -210,6 +242,7 @@ repository:
         patterns:
           - include: "#slice"
   slice:
+    name: meta.variable.slice.alogic
     patterns:
       - match: "(\\d+)([+-]?:)(\\d+)"
         captures:
@@ -222,6 +255,7 @@ repository:
       - match: \d+
         name: constant.numeric.alogic
   method-invocation:
+    name: meta.function.invocation.alogic
     match: (\w+)\.(\w+)\s*\((.*)\)
     captures:
       1:
@@ -229,26 +263,43 @@ repository:
       2:
         name: entity.name.function
       3:
-        pattern:
-          - include: "#rvalue"
-  # TODO Improve/add support for if, elseif, else
+        patterns:
+          - include: "#expr"
   if-stmt:
+    name: meta.control.if.alogic
     match: (if)\s*\((.+)\)
     captures:
       1:
         name: keyword.control.alogic
       2:
         patterns:
-          - include: "#rvalue"
+          - include: "#expr"
+  else-if-stmt:
+    name: meta.control.elseif.alogic
+    match: (else if)\s*\((.+)\)
+    captures:
+      1:
+        name: keyword.control.alogic
+      2:
+        patterns:
+          - include: "#expr"
+  else-stmt:
+    name: meta.control.else.alogic
+    match: (else)
+    captures:
+      1:
+        name: keyword.control.alogic
   while-stmt:
+    name: meta.control.while.alogic
     match: (while)\s*\((.+)\)
     captures:
       1:
         name: keyword.control.alogic
       2:
         patterns:
-          - include: "#rvalue"
+          - include: "#expr"
   case-stmt:
+    name: meta.control.case.alogic
     begin: (case)\s*\((.+)\)
     end: \}
     beginCaptures:
@@ -256,15 +307,14 @@ repository:
         name: keyword.control.alogic
       2:
         patterns:
-          - include: "#rvalue"
-    contentName: meta.case.alogic
+          - include: "#expr"
     patterns:
       - begin: \{
         end: .?(?=\})
-        contentName: meta.case.body.alogic
         patterns:
           - include: "#case-stmt-arm"
   case-stmt-arm:
+    name: meta.control.case.arm.alogic
     begin: "(.+):"
     end: \}
     beginCaptures:
@@ -273,14 +323,14 @@ repository:
           - include: "#literal"
           - name: keyword.control.alogic
             match: default
-    contentName: meta.case.arm.alogic
     patterns:
       - begin: \{
         end: .?(?=\})
-        contentName: meta.case.arm.body.alogic
+        contentName: meta.control.case.arm.body.alogic
         patterns:
           - include: "#stmt-block-body"
   field-decl:
+    name: meta.field.decl.alogic
     match: (\w+)\s+(\w+);
     captures:
       1:
@@ -288,61 +338,78 @@ repository:
       2:
         name: variable.alogic
   fence-block:
+    name: meta.block.fence.alogic
     begin: (fence)
     end: \}
     beginCaptures:
       1:
         name: keyword.alogic
-    contentName: meta.fenceblock.alogic
+    contentName: meta.fence.block.body.alogic
     patterns:
       - begin: \{
         end: .?(?=\})
-        contentName: meta.fenceblock.body.alogic
         patterns:
           - include: "#stmt-block-body"
   function:
+    name: meta.block.function.alogic
     begin: (void)\s+(\w+)\(\s*\)
     end: \}
-    contentName: meta.function.alogic
     beginCaptures:
       1:
         name: keyword.alogic
       2:
         name: entity.name.function.alogic
+    contentName: meta.block.function.body.alogic
     patterns:
       - begin: \{
         end: .?(?=\})
-        contentName: meta.function.body.alogic
         patterns:
           - include: "#stmt-block-body"
   stmt-block:
+    name: meta.block.stmt.alogic
     begin: \{
     end: \}
-    name: meta.scopeblock.alogic
+    contentName: meta.block.stmt.body.alogic
     patterns:
       - include: "#stmt-block-body"
   stmt-block-body:
     patterns:
       - include: "#stmt-block"
-      - include: "#variable-assignment"
+      - include: "#stmt"
+      - include: "#comment"
+  stmt:
+    patterns:
       - include: "#variable-decl"
       - include: "#if-stmt"
+      - include: "#else-if-stmt"
+      - include: "#else-stmt"
       - include: "#while-stmt"
       - include: "#case-stmt"
-      - include: "#loop-statement"
-      - include: "#fence-statement"
-      - include: "#comment"
-  loop-statement:
+      - include: "#loop-stmt"
+      - include: "#goto-stmt"
+      - include: "#fence-stmt"
+      - include: "#expr-stmt"
+  expr-stmt:
+    name: meta.stmt.expr.alogic
+    match: \b(.+);
+    captures:
+      1:
+        patterns:
+          - include: "#expr"
+  loop-stmt:
+    name: meta.control.loop.alogic
     match: (loop)
     captures:
       1:
         name: keyword.control.alogic
-  fence-statement:
+  fence-stmt:
+    name: meta.control.fence.alogic
     match: (fence);
     captures:
       1:
         name: keyword.control.alogic
-  goto-statement:
+  goto-stmt:
+    name: meta.control.goto.alogic
     match: (goto)\s+(\w+);
     captures:
       1:
@@ -395,7 +462,7 @@ repository:
       - name: constant.numeric.alogic
         match: \d*'h[0-9a-fA-F]+\b
       - name: constant.numeric.alogic
-        match: \d+\b
+        match: \d+[^']
   comment:
     patterns:
       - name: comment

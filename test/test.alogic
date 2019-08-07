@@ -28,12 +28,22 @@ fsm cake
 
   void main()
   {
-    if (cake) {
-
+    u32 a;
+    u32 b = 1;
+    a = 1;
+    fun_t badger = cake.read();
+    if (badger) {
+      salmon.write(1);
+    } else if (a) {
+      salmon.write(2);
+    } else {
+      salmon.write(3);
     }
 
+    cheese.write(badger);
     while (cheese) {
-
+      u8 cake = jam + sponge - butter_cream;
+      u17 plam = |((cake && cheese) > &badger[12+:4]) - 'hAA;
     }
 
     loop {
