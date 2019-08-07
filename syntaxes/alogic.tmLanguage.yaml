@@ -5,6 +5,7 @@ patterns:
   - include: "#struct-decl"
   - include: "#fsm-entity-decl"
   - include: "#network-entity-decl"
+  - include: "#verbatim-entity-decl"
   - include: "#comment"
 repository:
   include-directive:
@@ -86,13 +87,43 @@ repository:
         end: .?(?=\})
         contentName: meta.network.body.alogic
         patterns:
-          - include: "#network-entity-body"
-  network-entity-body:
+        - include: "#common-entity-body"
+        - include: "#port-assignment"
+        - include: "#entity-instantiation"
+        - include: "#singleton-fsm-entity-decl"
+  verbatim-entity-decl:
+    begin: (verbatim)\s+(entity)\s+(\w+)\s*
+    end: \}
+    captures:
+      1:
+        name: keyword.alogic
+      2:
+        name: keyword.alogic
+      3:
+        name: entity.name.type.alogic
+    contentName: meta.verbatim.alogic
     patterns:
-      - include: "#common-entity-body"
-      - include: "#port-assignment"
-      - include: "#entity-instantiation"
-      - include: "#singleton-fsm-entity-decl"
+      - begin: \{
+        end: .?(?=\})
+        contentName: meta.verbatim.body.alogic
+        patterns:
+          - include: "#common-entity-body"
+          - include: "#verbatim-verilog-block"
+  verbatim-verilog-block:
+    begin: (verbatim)\s+(verilog)
+    end: \}
+    contentName: meta.verbatim.verilog.alogic
+    beginCaptures:
+      1:
+        name: keyword.alogic
+      2:
+        name: keyword.alogic
+    patterns:
+      - begin: \{
+        end: .?(?=\})
+        contentName: meta.embedded.block.verilog
+        patterns:
+          - include: "source.verilog"
   common-entity-body:
     patterns:
       - include: "#param-or-const-decl"

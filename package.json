@@ -28,7 +28,10 @@
             {
                 "language": "alogic",
                 "scopeName": "source.alogic",
-                "path": "./syntaxes/alogic.tmLanguage.json"
+                "path": "./syntaxes/alogic.tmLanguage.json",
+                "embeddedLanguages": {
+                    "meta.embedded.block.verilog": "verilog"
+                }
             }
         ]
     },
