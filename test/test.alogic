@@ -2,10 +2,11 @@
 
 fsm cake
 {
+  // Comment
   param uint UNSIZED_BINARY = 'b01;
   param uint SIZED_BINARY = 8'b01;
   param uint UNSIZED_HEX = 'h0123456789aBcDeF;
-  param uint SIZED_HEX = 8'h0123456789aBcDeF;
+  param uint SIZED_HEX = 8'h0123456789aBcDeF; // Comment
   param uint UNSIZED_DEC = 'd0123456789;
   param uint SIZED_DEC = 8'd0123456789;
   const uint FREE_NUMBER = 12345;
@@ -26,6 +27,7 @@ fsm cake
 
   uint fun_times = 19;
 
+  /* A long comment */
   void main()
   {
     u32 a;
