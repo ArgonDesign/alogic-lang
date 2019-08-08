@@ -467,6 +467,7 @@ repository:
     patterns:
       - name: comment
         match: //.*
-      - begin: /\*
+      - name: comment
+        begin: /\*
         end: \*/
 scopeName: source.alogic
