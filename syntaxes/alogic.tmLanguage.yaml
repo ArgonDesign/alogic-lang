@@ -1,23 +1,12 @@
 $schema: 'https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json'
 name: alogic
 patterns:
-  - include: "#include-directive"
   - include: "#struct-decl"
   - include: "#fsm-entity-decl"
   - include: "#network-entity-decl"
   - include: "#verbatim-entity-decl"
   - include: "#comment"
 repository:
-  include-directive:
-    name: meta.include.alogic
-    patterns:
-      - match: (#include)\s(.*)
-        captures:
-          1:
-            name: keyword.alogic
-          2:
-            patterns:
-              - include: "#string"
   struct-decl:
     name: meta.struct.alogic
     begin: (struct+)\s+(\w+)
