@@ -1,6 +1,8 @@
 $schema: 'https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json'
 name: alogic
 patterns:
+  - include: "#import-stmt"
+  - include: "#from-import-stmt"
   - include: "#const-decl"
   - include: "#struct-decl"
   - include: "#fsm-entity-decl"
@@ -8,6 +10,34 @@ patterns:
   - include: "#verbatim-entity-decl"
   - include: "#comment"
 repository:
+  import-stmt:
+    name: meta.import.alogic
+    match: (import)\s+(\".*\")(?:\s+(as)\s*(\w+))?;
+    captures:
+      1:
+        name: keyword.alogic
+      2:
+        name: string.quoted.double.alogic
+      3:
+        name: keyword.alogic
+      4:
+        name: entity.name.type.alogic
+  from-import-stmt:
+    name: meta.import.alogic
+    match: (from)\s+(\".*\")\s+(import)\s+([a-zA-Z_][a-zA-Z0-9_\.]*)(?:\s+(as)\s*(\w+))?;
+    captures:
+      1:
+        name: keyword.alogic
+      2:
+        name: string.quoted.double.alogic
+      3:
+        name: keyword.alogic
+      4:
+        name: entity.name.type.alogic
+      5:
+        name: keyword.alogic
+      6:
+        name: entity.name.type.alogic
   struct-decl:
     name: meta.struct.alogic
     begin: (struct+)\s+(\w+)

@@ -1,6 +1,14 @@
 
 const u8 cheese = 4;
 
+import "cheese";
+import "cheese" as cake;
+import "cheese/fromage" as cabbage;
+
+from "cake" import cheese;
+from "cake/cheese" import something;
+from "cake/cheese" import something as bread;
+
 fsm cake
 {
   // Comment
