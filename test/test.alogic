@@ -1,4 +1,6 @@
 
+const u8 cheese = 4;
+
 fsm cake
 {
   // Comment
@@ -8,6 +10,7 @@ fsm cake
   param uint SIZED_HEX = 8'h0123456789aBcDeF; // Comment
   param uint UNSIZED_DEC = 'd0123456789;
   param uint SIZED_DEC = 8'd0123456789;
+  param uint UNSPECIFIED_PARAM;
   const uint FREE_NUMBER = 12345;
   const string FREE_STRING = "string";
   const thing_t other = cheese;
@@ -122,3 +125,7 @@ verbatim entity arb {
     assign i_1__ready = o__ready & ~i_0__valid;
   }
 }
+
+// These shouldn't highlight
+
+param u10 a_name = 7;

@@ -1,6 +1,7 @@
 $schema: 'https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json'
 name: alogic
 patterns:
+  - include: "#const-decl"
   - include: "#struct-decl"
   - include: "#fsm-entity-decl"
   - include: "#network-entity-decl"
@@ -117,7 +118,8 @@ repository:
           - include: "source.verilog"
   common-entity-body:
     patterns:
-      - include: "#param-or-const-decl"
+      - include: "#param-decl"
+      - include: "#const-decl"
       - include: "#port-decl"
       - include: "#comment"
   port-decl:
@@ -154,9 +156,22 @@ repository:
   flow-control-type:
     name: keyword.alogic
     match: sync(\s+(ready|accept))?
-  param-or-const-decl:
+  const-decl:
     name: meta.const.decl.alogic
-    match: (param|const)\s+(\w+)\s+(\w+)\s*=\s*(.+);
+    match: (const)\s+(\w+)\s+(\w+)\s*=\s*(.+);
+    captures:
+      1:
+        name: keyword.alogic
+      2:
+        name: entity.name.type.alogic
+      3:
+        name: variable.alogic
+      4:
+        patterns:
+          - include: "#literal"
+  param-decl:
+    name: meta.const.decl.alogic
+    match: (param)\s+(\w+)\s+(\w+)\s*(?:=\s*(.+))?;
     captures:
       1:
         name: keyword.alogic
