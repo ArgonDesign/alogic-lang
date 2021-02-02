@@ -303,6 +303,7 @@ repository:
               - include: "#expr"
       - include: "#literal"
       - include: "#lvalue"
+      - include: "#block-comment"
   lvalue:
     name: meta.lvalue.alogic
     match: ([a-zA-Z_]\w*)(?:\[(.+)])?
@@ -683,9 +684,13 @@ repository:
     match: (true|false)
   comment:
     patterns:
-      - name: comment
-        match: //.*
-      - name: comment
-        begin: /\*
-        end: \*/
+      - include: "#line-comment"
+      - include: "#block-comment"
+  line-comment:
+    name: comment
+    match: //.*
+  block-comment:
+    name: comment
+    begin: /\*
+    end: \*/
 scopeName: source.alogic

@@ -91,7 +91,7 @@ fsm cake
     u32 b = 1;
     a = 1;
     fun_t badger = cake.read();
-    if (badger) {
+    if (badger /* cake */) {
       salmon.write(1);
     } else if (a) {
       salmon.write(2);
@@ -105,7 +105,7 @@ fsm cake
 
     assert cake >= cheese, "CAKE ISN'T BETTER THAN CHEESE!";
 
-    for (uint i = 0; i < 7; ++i) {
+    for (uint i = 0; i < 7 /* cake */; ++i) {
       if (cheese) {
         bool grapes = true;
         break;
@@ -116,7 +116,7 @@ fsm cake
 
     do {
 
-    } while (true);
+    } while (true /* cake */);
 
     gen if (a + (b + c)) {
       u8 a = (1 + 2);
