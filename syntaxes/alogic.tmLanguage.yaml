@@ -508,6 +508,7 @@ repository:
       - include: "#goto-stmt"
       - include: "#fence-stmt"
       - include: "#break-stmt"
+      - include: "#continue-stmt"
       - include: "#gen-stmt-body"
       - include: "#expr-stmt"
       - include: "#variable-decl"
@@ -534,6 +535,12 @@ repository:
   break-stmt:
     name: meta.control.break.alogic
     match: (break);
+    captures:
+      1:
+        name: keyword.control.alogic
+  continue-stmt:
+    name: meta.control.continue.alogic
+    match: (continue);
     captures:
       1:
         name: keyword.control.alogic

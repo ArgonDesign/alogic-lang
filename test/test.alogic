@@ -115,7 +115,11 @@ fsm cake
     }
 
     loop {
-      break;
+      if (cheese) {
+        continue;
+      } else {
+        break;
+      }
     }
 
     case (quack) {
