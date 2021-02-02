@@ -507,6 +507,7 @@ repository:
       - include: "#return-stmt"
       - include: "#goto-stmt"
       - include: "#fence-stmt"
+      - include: "#break-stmt"
       - include: "#gen-stmt-body"
       - include: "#expr-stmt"
       - include: "#variable-decl"
@@ -527,6 +528,12 @@ repository:
   fence-stmt:
     name: meta.control.fence.alogic
     match: (fence);
+    captures:
+      1:
+        name: keyword.control.alogic
+  break-stmt:
+    name: meta.control.break.alogic
+    match: (break);
     captures:
       1:
         name: keyword.control.alogic
