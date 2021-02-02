@@ -388,6 +388,19 @@ repository:
         end: .?(?=\})
         patterns:
           - include: "#stmt-block-body"
+  let-stmt:
+    name: meta.let.alogic
+    match: (let)\s*\((\w+)\s+(\w+)\s*=\s*(.+)\)
+    captures:
+      1:
+        name: keyword.control.alogic
+      2:
+        name: entity.name.type.alogic
+      3:
+        name: variable.alogic
+      4:
+        patterns:
+          - include: "#expr"
   case-stmt:
     name: meta.control.case.alogic
     begin: (case)\s*\((.+)\)
@@ -512,6 +525,7 @@ repository:
       - include: "#fence-stmt"
       - include: "#break-stmt"
       - include: "#continue-stmt"
+      - include: "#let-stmt"
       - include: "#gen-stmt-body"
       - include: "#assert-stmt"
       - include: "#expr-stmt"

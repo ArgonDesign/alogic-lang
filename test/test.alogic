@@ -136,6 +136,11 @@ fsm cake
       u17 plam = |((cake && cheese) > &badger[12+:4]) - 'hAA;
     }
 
+    let (u3 i = 0) do {
+      foo[i] = 0;
+      i++;
+    } while (i);
+
     loop {
       if (cheese) {
         continue;
