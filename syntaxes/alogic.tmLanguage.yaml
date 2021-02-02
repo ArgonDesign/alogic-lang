@@ -293,7 +293,6 @@ repository:
           - include: "#expr"
   expr:
     patterns:
-      - include: "#variable-assignment"
       - include: "#method-invocation"
       - name: meta.operation.unary
         match: ([|&~])(.+)
@@ -511,6 +510,7 @@ repository:
       - include: "#gen-stmt-body"
       - include: "#expr-stmt"
       - include: "#variable-decl"
+      - include: "#variable-assignment"
   expr-stmt:
     name: meta.stmt.expr.alogic
     match: \b(.+);
