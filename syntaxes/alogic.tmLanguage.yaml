@@ -67,6 +67,7 @@ repository:
   struct-body:
     patterns:
       - include: "#field-decl"
+      - include: "#function"
       - include: "#comment"
       - include: "#gen-struct-body"
   gen-struct-body:
