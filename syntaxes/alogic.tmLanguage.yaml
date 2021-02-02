@@ -127,6 +127,7 @@ repository:
       - include: "#fence-block"
       - include: "#function"
       - include: "#gen-fsm-body"
+      - include: "#assert-stmt"
   gen-fsm-body:
     name: meta.control.gen.alogic
     begin: (gen)\s+(if|for)
@@ -511,6 +512,7 @@ repository:
       - include: "#break-stmt"
       - include: "#continue-stmt"
       - include: "#gen-stmt-body"
+      - include: "#assert-stmt"
       - include: "#expr-stmt"
       - include: "#variable-decl"
       - include: "#variable-assignment"
@@ -600,6 +602,18 @@ repository:
         contentName: meta.control.gen.body.alogic
         patterns:
           - include: "#stmt-block-body"
+  assert-stmt:
+    name: meta.assert.alogic
+    begin: (static)?\s+(assert)
+    end: ;
+    beginCaptures:
+      1:
+        name: keyword.alogic
+      2:
+        name: keyword.alogic
+    patterns:
+      - include: "#expr"
+      - include: "#string"
   entity-instantiation:
     name: meta.entity.instantiation.alogic
     match: (\w+)\s*=\s*(new)\s*(\w+)\s*\((.*)\);

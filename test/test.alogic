@@ -81,6 +81,9 @@ fsm cake
     in wire porty_mc_port_face#[P];
   }
 
+  static assert NUM_TIGERS > 7,
+                "Need more tigers!";
+
   /* A long comment */
   void main()
   {
@@ -99,6 +102,8 @@ fsm cake
     if (true) {
 
     }
+
+    assert cake >= cheese, "CAKE ISN'T BETTER THAN CHEESE!";
 
     for (uint i = 0; i < 7; ++i) {
       if (cheese) {
