@@ -443,7 +443,7 @@ repository:
           - include: "#stmt-block-body"
   function:
     name: meta.block.function.alogic
-    begin: (?:(static)\s+)?(\w+)\s+(\w+)\(\s*\)
+    begin: (?:(static)\s+)?(\w+)\s+(\w+)\((.*)\)
     end: \}
     beginCaptures:
       1:
@@ -456,12 +456,25 @@ repository:
             name: entity.name.type.alogic
       3:
         name: entity.name.function.alogic
+      4:
+        patterns:
+          - include: "#argument-decl"
     contentName: meta.block.function.body.alogic
     patterns:
       - begin: \{
         end: .?(?=\})
         patterns:
           - include: "#stmt-block-body"
+  argument-decl:
+    match: \s*(\w+)\s+(\w+)\s*(?:,(.*))?
+    captures:
+      1:
+        name: entity.name.type.alogic
+      2:
+        name: variable
+      3:
+        patterns:
+          - include: "#argument-decl"
   stmt-block:
     name: meta.block.stmt.alogic
     begin: \{
