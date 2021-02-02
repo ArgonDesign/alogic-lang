@@ -506,6 +506,7 @@ repository:
       - include: "#while-stmt"
       - include: "#case-stmt"
       - include: "#loop-stmt"
+      - include: "#return-stmt"
       - include: "#goto-stmt"
       - include: "#fence-stmt"
       - include: "#expr-stmt"
@@ -529,6 +530,14 @@ repository:
     captures:
       1:
         name: keyword.control.alogic
+  return-stmt:
+    name: meta.control.return.alogic
+    match: (return)\s+(:?(\w+))?;
+    captures:
+      1:
+        name: keyword.control.alogic
+      2:
+        name: variable
   goto-stmt:
     name: meta.control.goto.alogic
     match: (goto)\s+(\w+);
