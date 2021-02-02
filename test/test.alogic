@@ -9,6 +9,18 @@ from "cake" import cheese;
 from "cake/cheese" import something;
 from "cake/cheese" import something as bread;
 
+struct intra_angle_est_bin_map_weight_output_t {
+  bool use128;
+  u22 allowed_sizes; // for luma/chroma as required
+  num_cands_t num_cands; // for luma/chroma as required
+  bool chroma;
+  gen for (uint p < GRAD_PARALLEL) {
+    hist_bucket_idx_t bucket_idx#[p];
+    hist_bin_idx_t bin_idx#[p]; // test comment
+    grad_weight_t weight#[p];
+  }
+}
+
 fsm cake
 {
   // Comment
@@ -37,6 +49,18 @@ fsm cake
 
   uint fun_times = 19;
 
+  gen if (a + (b + c)) {
+    out sync ready u9 fun;
+  }
+
+  gen for (uint X = 0; X < cake; cake++) {
+    in wire porty_mc_port_face#[X];
+  }
+
+  gen for (uint P < 8) {
+    in wire porty_mc_port_face#[P];
+  }
+
   /* A long comment */
   void main()
   {
@@ -50,6 +74,18 @@ fsm cake
       salmon.write(2);
     } else {
       salmon.write(3);
+    }
+
+    gen if (a + (b + c)) {
+      u8 a = (1 + 2);
+    }
+
+    gen for (uint X = 0; X < cake; cake++) {
+      u8 a = (1 + 2);
+    }
+
+    gen for (uint P < 8) {
+      u8 a = (1 + 2);
     }
 
     cheese.write(badger);
@@ -97,6 +133,18 @@ network net {
 
   param uint CHEESE = 1'h7;
   const i32 VALUE = 9;
+
+  gen if (a + (b + c)) {
+    out sync ready u9 fun;
+  }
+
+  gen for (uint X = 0; X < cake; cake++) {
+    in wire porty_mc_port_face;
+  }
+
+  gen for (uint P < 8) {
+    in wire porty_mc_port_face;
+  }
 
   new fsm singleton {
 

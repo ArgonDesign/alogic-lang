@@ -57,6 +57,25 @@ repository:
     patterns:
       - include: "#field-decl"
       - include: "#comment"
+      - include: "#gen-struct-body"
+  gen-struct-body:
+    name: meta.control.gen.alogic
+    begin: (gen)\s+(if|for)
+    end: \}
+    beginCaptures:
+      1:
+        name: keyword.control.alogic
+      2:
+        name: keyword.control.alogic
+    patterns:
+      - begin: \(
+        end: \)
+        contentName: meta.control.gen.condition.alogic
+      - begin: \{
+        end: .?(?=\})
+        contentName: meta.control.gen.struct.body.alogic
+        patterns:
+          - include: "#struct-body"
   fsm-entity-decl:
     name: meta.fsm.alogic
     begin: (fsm)\s+(\w+)
@@ -95,6 +114,25 @@ repository:
       - include: "#variable-decl"
       - include: "#fence-block"
       - include: "#function"
+      - include: "#gen-fsm-body"
+  gen-fsm-body:
+    name: meta.control.gen.alogic
+    begin: (gen)\s+(if|for)
+    end: \}
+    beginCaptures:
+      1:
+        name: keyword.control.alogic
+      2:
+        name: keyword.control.alogic
+    patterns:
+      - begin: \(
+        end: \)
+        contentName: meta.control.gen.condition.alogic
+      - begin: \{
+        end: .?(?=\})
+        contentName: meta.control.gen.fsm.body.alogic
+        patterns:
+          - include: "#fsm-entity-body"
   network-entity-decl:
     name: meta.network.alogic
     begin: (network)\s+(\w+)\s*
@@ -109,10 +147,32 @@ repository:
       - begin: \{
         end: .?(?=\})
         patterns:
-        - include: "#common-entity-body"
-        - include: "#port-assignment"
-        - include: "#entity-instantiation"
-        - include: "#singleton-fsm-entity-decl"
+        - include: "#network-entity-body"
+  network-entity-body:
+    patterns:
+      - include: "#common-entity-body"
+      - include: "#port-assignment"
+      - include: "#entity-instantiation"
+      - include: "#singleton-fsm-entity-decl"
+      - include: "#gen-network-body"
+  gen-network-body:
+    name: meta.control.gen.alogic
+    begin: (gen)\s+(if|for)
+    end: \}
+    beginCaptures:
+      1:
+        name: keyword.control.alogic
+      2:
+        name: keyword.control.alogic
+    patterns:
+      - begin: \(
+        end: \)
+        contentName: meta.control.gen.condition.alogic
+      - begin: \{
+        end: .?(?=\})
+        contentName: meta.control.gen.network.body.alogic
+        patterns:
+          - include: "#network-entity-body"
   verbatim-entity-decl:
     name: meta.verbatim.alogic
     begin: (verbatim)\s+(entity)\s+(\w+)\s*
@@ -154,7 +214,7 @@ repository:
       - include: "#comment"
   port-decl:
     name: meta.port.in.alogic
-    match: (in|out)\s+(.+\s)?(\w+)\s+(\w+);
+    match: (in|out)\s+(.+\s)?(\w+)\s+(\w+)(?:#\[(\w+)\])?;
     captures:
       1:
         name: keyword.alogic
@@ -164,6 +224,8 @@ repository:
       3:
         name: entity.name.type.alogic
       4:
+        name: variable.alogic
+      5:
         name: variable.alogic
   flow-control-type:
     name: keyword.alogic
@@ -347,11 +409,13 @@ repository:
           - include: "#stmt-block-body"
   field-decl:
     name: meta.field.decl.alogic
-    match: (\w+)\s+(\w+);
+    match: (\w+)\s+(\w+)(?:#\[(\w+)])?;
     captures:
       1:
         name: entity.name.type.alogic
       2:
+        name: variable.alogic
+      3:
         name: variable.alogic
   fence-block:
     name: meta.block.fence.alogic
@@ -405,6 +469,7 @@ repository:
       - include: "#goto-stmt"
       - include: "#fence-stmt"
       - include: "#expr-stmt"
+      - include: "#gen-stmt-body"
   expr-stmt:
     name: meta.stmt.expr.alogic
     match: \b(.+);
@@ -432,6 +497,24 @@ repository:
         name: keyword.control.alogic
       2:
         name: entity.name.function
+  gen-stmt-body:
+    name: meta.control.gen.alogic
+    begin: (gen)\s+(if|for)
+    end: \}
+    beginCaptures:
+      1:
+        name: keyword.control.alogic
+      2:
+        name: keyword.control.alogic
+    patterns:
+      - begin: \(
+        end: \)
+        contentName: meta.control.gen.condition.alogic
+      - begin: \{
+        end: .?(?=\})
+        contentName: meta.control.gen.body.alogic
+        patterns:
+          - include: "#stmt-block-body"
   entity-instantiation:
     match: (\w+)\s*=\s*(new)\s*(\w+)\s*\(\s*\)
     captures:
