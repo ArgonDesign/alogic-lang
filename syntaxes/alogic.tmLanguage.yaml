@@ -647,7 +647,7 @@ repository:
       - name: constant.numeric.alogic
         match: \d*'h[0-9a-fA-F]+\b
       - name: constant.numeric.alogic
-        match: \d+[^']
+        match: \d+\b
   boolean:
     name: keyword.alogic
     match: (true|false)
