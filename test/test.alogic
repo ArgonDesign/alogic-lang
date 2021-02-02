@@ -96,6 +96,10 @@ fsm cake
       salmon.write(3);
     }
 
+    if (true) {
+
+    }
+
     for (uint i = 0; i < 7; ++i) {
       if (cheese) {
         bool grapes = true;
@@ -104,6 +108,10 @@ fsm cake
         fence;
       }
     }
+
+    do {
+
+    } while (true);
 
     gen if (a + (b + c)) {
       u8 a = (1 + 2);

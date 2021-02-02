@@ -387,6 +387,24 @@ repository:
       2:
         patterns:
           - include: "#expr"
+  do-while-stmt:
+    name: meta.control.do-while.alogic
+    begin: (do)\s*
+    end: \}\s*(while)\s*\((.*)\);
+    beginCaptures:
+      1:
+        name: keyword.control.alogic
+    endCaptures:
+      1:
+        name: keyword.control.alogic
+      2:
+        patterns:
+          - include: "#expr"
+    patterns:
+      - begin: \{
+        end: .?(?=\})
+        patterns:
+          - include: "#stmt-block-body"
   case-stmt:
     name: meta.control.case.alogic
     begin: (case)\s*\((.+)\)
@@ -502,6 +520,7 @@ repository:
       - include: "#else-if-stmt"
       - include: "#else-stmt"
       - include: "#while-stmt"
+      - include: "#do-while-stmt"
       - include: "#for-stmt"
       - include: "#case-stmt"
       - include: "#loop-stmt"
