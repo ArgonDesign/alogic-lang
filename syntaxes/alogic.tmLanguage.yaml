@@ -630,6 +630,7 @@ repository:
     patterns:
       - include: "#number"
       - include: "#string"
+      - include: "#boolean"
   string:
     name: string.quoted.double.alogic
     begin: '"'
@@ -647,6 +648,9 @@ repository:
         match: \d*'h[0-9a-fA-F]+\b
       - name: constant.numeric.alogic
         match: \d+[^']
+  boolean:
+    name: keyword.alogic
+    match: (true|false)
   comment:
     patterns:
       - name: comment
