@@ -402,10 +402,23 @@ repository:
       - begin: \{
         end: .?(?=\})
         patterns:
-          - include: "#case-stmt-arm"
-  case-stmt-arm:
+          - include: "#case-arm-block"
+          - include: "#case-arm-stmt"
+  case-arm-stmt:
     name: meta.control.case.arm.alogic
     begin: "(.+):"
+    end: (?<=;)
+    beginCaptures:
+      1:
+        patterns:
+          - include: "#literal"
+          - name: keyword.control.alogic
+            match: default
+    patterns:
+      - include: "#stmt"
+  case-arm-block:
+    name: meta.control.case.arm.alogic
+    begin: "(.+):\\s*{"
     end: \}
     beginCaptures:
       1:
@@ -414,11 +427,7 @@ repository:
           - name: keyword.control.alogic
             match: default
     patterns:
-      - begin: \{
-        end: .?(?=\})
-        contentName: meta.control.case.arm.body.alogic
-        patterns:
-          - include: "#stmt-block-body"
+      - include: "#stmt-block-body"
   field-decl:
     name: meta.field.decl.alogic
     match: (\w+)\s+(\w+)(?:#\[(\w+)])?;
