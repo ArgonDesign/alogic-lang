@@ -294,29 +294,10 @@ repository:
   expr:
     patterns:
       - include: "#method-invocation"
-      - name: meta.operation.unary
-        match: ([|&~])(.+)
-        captures:
-          1:
-            name: keyword.operator.alogic
-          2:
-            patterns:
-              - include: "#expr"
       - name: meta.expr.parenthetical.alogic
         match: \((.+)\)
         captures:
           1:
-            patterns:
-              - include: "#expr"
-      - name: meta.operation.binary
-        match: (.+)\s*(\+|-|\*|/|==|!=|>|>=|<|<=|&|\||^|&&|\|\|)\s*(.+)
-        captures:
-          1:
-            patterns:
-              - include: "#expr"
-          2:
-            name: keyword.operator.alogic
-          3:
             patterns:
               - include: "#expr"
       - include: "#literal"
