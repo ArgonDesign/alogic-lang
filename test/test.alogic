@@ -21,6 +21,25 @@ struct intra_angle_est_bin_map_weight_output_t {
   }
 }
 
+typedef u3 angle_delta_unsigned_t;
+struct angle_delta_funcs {
+  /* Function to map an unsigned delta (bin index within a bucket) to the
+  absolute value of the signed delta this represents. */
+  static u2 unsigned_to_abs_signed(angle_delta_unsigned_t d) {
+    u2 output;
+    case (d) {
+      3'd0, 3'd6: output = 2'd3;
+      3'd1, 3'd5: output = 2'd2;
+      3'd2, 3'd4: output = 2'd1;
+      default: {
+        assert d == 3'd3;
+        output = 2'd0;
+      }
+    }
+    return output;
+  }
+}
+
 fsm cake
 {
   // Comment

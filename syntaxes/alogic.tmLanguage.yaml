@@ -4,6 +4,7 @@ patterns:
   - include: "#import-stmt"
   - include: "#from-import-stmt"
   - include: "#const-decl"
+  - include: "#typedef-decl"
   - include: "#struct-decl"
   - include: "#fsm-entity-decl"
   - include: "#network-entity-decl"
@@ -37,6 +38,16 @@ repository:
       5:
         name: keyword.alogic
       6:
+        name: entity.name.type.alogic
+  typedef-decl:
+    name: meta.typedef.alogic
+    match: (typedef)\s+(\w+)\s+(\w+);
+    captures:
+      1:
+        name: keyword.alogic
+      2:
+        name: entity.name.type.alogic
+      3:
         name: entity.name.type.alogic
   struct-decl:
     name: meta.struct.alogic
