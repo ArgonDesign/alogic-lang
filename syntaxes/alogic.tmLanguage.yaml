@@ -323,7 +323,7 @@ repository:
       - include: "#lvalue"
   lvalue:
     name: meta.lvalue.alogic
-    match: (\w+)(?:\[(.+)])?
+    match: ([a-zA-Z_]\w*)(?:\[(.+)])?
     captures:
       1:
         name: variable
