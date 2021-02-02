@@ -499,7 +499,6 @@ repository:
       - include: "#comment"
   stmt:
     patterns:
-      - include: "#variable-decl"
       - include: "#if-stmt"
       - include: "#else-if-stmt"
       - include: "#else-stmt"
@@ -509,8 +508,9 @@ repository:
       - include: "#return-stmt"
       - include: "#goto-stmt"
       - include: "#fence-stmt"
-      - include: "#expr-stmt"
       - include: "#gen-stmt-body"
+      - include: "#expr-stmt"
+      - include: "#variable-decl"
   expr-stmt:
     name: meta.stmt.expr.alogic
     match: \b(.+);
