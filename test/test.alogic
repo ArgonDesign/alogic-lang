@@ -193,6 +193,8 @@ network net {
 
   cake = new cake();
 
+  cheese = new cheese(with_chilli = true, cheese = 1'd8);
+
   in -> cake.in;
 
   // These shouldn't highlight

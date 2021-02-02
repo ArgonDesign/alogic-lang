@@ -620,7 +620,8 @@ repository:
         patterns:
           - include: "#stmt-block-body"
   entity-instantiation:
-    match: (\w+)\s*=\s*(new)\s*(\w+)\s*\(\s*\)
+    name: meta.entity.instantiation.alogic
+    match: (\w+)\s*=\s*(new)\s*(\w+)\s*\((.*)\);
     captures:
       1:
         name: variable.alogic
@@ -628,6 +629,21 @@ repository:
         name: keyword.alogic
       3:
         name: entity.name.type.alogic
+      4:
+        name: meta.entity.instantiation.params.alogic
+        patterns:
+          - include: "#param-def"
+  param-def:
+    match: (\w+)\s*=\s*([^,]+)(?:,(.*))?
+    captures:
+      1:
+        name: variable.alogic
+      2:
+        patterns:
+          - include: "#expr"
+      3:
+        patterns:
+          - include: "#param-def"
   port-assignment:
     match: ([a-zA-Z0-9_\.]+)\s*->\s*([a-zA-Z0-9_\.]+);
     captures:
