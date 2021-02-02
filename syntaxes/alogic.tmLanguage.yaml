@@ -153,31 +153,13 @@ repository:
       - include: "#port-decl"
       - include: "#comment"
   port-decl:
-    patterns:
-      - include: "#in-port-decl"
-      - include: "#out-port-decl"
-  in-port-decl:
     name: meta.port.in.alogic
-    match: (in)\s+(.+\s)?(\w+)\s+(\w+);
+    match: (in|out)\s+(.+\s)?(\w+)\s+(\w+);
     captures:
       1:
         name: keyword.alogic
       2:
         patterns:
-          - include: "#flow-control-type"
-      3:
-        name: entity.name.type.alogic
-      4:
-        name: variable.alogic
-  out-port-decl:
-    name: meta.port.out.alogic
-    match: (out)\s+(.+\s)?(\w+)\s+(\w+);
-    captures:
-      1:
-        name: keyword.alogic
-      2:
-        patterns:
-          # This becomes more involved if you want to support storage types
           - include: "#flow-control-type"
       3:
         name: entity.name.type.alogic
