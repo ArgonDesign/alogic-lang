@@ -502,6 +502,7 @@ repository:
       - include: "#else-if-stmt"
       - include: "#else-stmt"
       - include: "#while-stmt"
+      - include: "#for-stmt"
       - include: "#case-stmt"
       - include: "#loop-stmt"
       - include: "#return-stmt"
@@ -520,6 +521,27 @@ repository:
       1:
         patterns:
           - include: "#expr"
+  for-stmt:
+    name: meta.control.for.alogic
+    begin: (for)\s*\((.*;)(.*;)(.*)\)\s*
+    end: \}
+    beginCaptures:
+      1:
+        name: keyword.control.alogic
+      2:
+        patterns:
+          - include: "#variable-decl"
+      3:
+        patterns:
+          - include: "#expr-stmt"
+      4:
+        patterns:
+          - include: "#expr"
+    patterns:
+      - begin: \{
+        end: .?(?=\})
+        patterns:
+          - include: "#stmt-block-body"
   loop-stmt:
     name: meta.control.loop.alogic
     match: (loop)

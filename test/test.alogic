@@ -96,6 +96,15 @@ fsm cake
       salmon.write(3);
     }
 
+    for (uint i = 0; i < 7; ++i) {
+      if (cheese) {
+        bool grapes = true;
+        break;
+      } else {
+        fence;
+      }
+    }
+
     gen if (a + (b + c)) {
       u8 a = (1 + 2);
     }
