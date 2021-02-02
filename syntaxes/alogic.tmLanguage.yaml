@@ -443,12 +443,14 @@ repository:
           - include: "#stmt-block-body"
   function:
     name: meta.block.function.alogic
-    begin: (void)\s+(\w+)\(\s*\)
+    begin: (?:(static)\s+)?(void)\s+(\w+)\(\s*\)
     end: \}
     beginCaptures:
       1:
         name: keyword.alogic
       2:
+        name: keyword.alogic
+      3:
         name: entity.name.function.alogic
     contentName: meta.block.function.body.alogic
     patterns:
