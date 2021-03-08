@@ -538,6 +538,8 @@ repository:
       - include: "#expr-stmt"
       - include: "#variable-decl"
       - include: "#variable-assignment"
+      - include: "#const-decl"
+      - include: "#unreachable-stmt"
   expr-stmt:
     name: meta.stmt.expr.alogic
     match: \b(.+);
@@ -598,6 +600,12 @@ repository:
         name: keyword.control.alogic
       2:
         name: variable
+  unreachable-stmt:
+    name: meta.control.unreachable.alogic
+    match: (unreachable);
+    captures:
+      1:
+        name: keyword.control.alogic
   goto-stmt:
     name: meta.control.goto.alogic
     match: (goto)\s+(\w+);

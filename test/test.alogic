@@ -14,7 +14,11 @@ from "cake" import *;
 
 bool my_combinational_func(u8 a, u2 b) {
   assert a != b, "Can't have a == b for some reason";
-  return a + b;
+  if (a < b) {
+    return a + b;
+  } else {
+    unreachable;
+  }
 }
 
 struct intra_angle_est_bin_map_weight_output_t {
@@ -35,8 +39,9 @@ struct intra_angle_est_bin_map_weight_output_t {
 
   static u3 get_allowed_sizes_0(u2 bar) {
     assert bar != 2, "Got bar == 2";
+    const uint BAZ = 2;
     if (chroma) {
-      return 0;
+      return BAZ;
     } else {
       return 'allowed_sizes[0] + 'bar;
     }
