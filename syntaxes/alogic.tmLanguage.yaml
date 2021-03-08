@@ -9,6 +9,7 @@ patterns:
   - include: "#fsm-entity-decl"
   - include: "#network-entity-decl"
   - include: "#verbatim-entity-decl"
+  - include: "#function"
   - include: "#comment"
 repository:
   import-stmt:
@@ -73,6 +74,7 @@ repository:
       - include: "#function"
       - include: "#comment"
       - include: "#gen-struct-body"
+      - include: "#assert-stmt"
   gen-struct-body:
     name: meta.control.gen.alogic
     begin: (gen)\s+(if|for)

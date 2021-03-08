@@ -12,8 +12,16 @@ from "cake/cheese" import something as bread;
 from "./cake" import cheese;
 from "cake" import *;
 
+bool my_combinational_func(u8 a, u2 b) {
+  assert a != b, "Can't have a == b for some reason";
+  return a + b;
+}
+
 struct intra_angle_est_bin_map_weight_output_t {
   param uint FOO;
+  static assert FOO != 0, "Parameter FOO must not be zero";
+  static assert FOO != 32,
+    "Parameter FOO must not be 32, testing a multiline static assert";
   bool use128;
   u22 allowed_sizes; // for luma/chroma as required
   num_cands_t num_cands; // for luma/chroma as required
@@ -22,6 +30,19 @@ struct intra_angle_est_bin_map_weight_output_t {
     hist_bucket_idx_t bucket_idx#[p];
     hist_bin_idx_t bin_idx#[p]; // test comment
     grad_weight_t weight#[p];
+  }
+
+  static u3 get_allowed_sizes_0(u2 bar) {
+    assert bar != 2, "Got bar == 2";
+    if (chroma) {
+      return 0;
+    } else {
+      return 'allowed_sizes[0] + 'bar;
+    }
+  }
+
+  bool get_chroma() {
+    return chroma;
   }
 }
 
