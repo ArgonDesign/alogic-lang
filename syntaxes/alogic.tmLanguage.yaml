@@ -75,6 +75,7 @@ repository:
       - include: "#comment"
       - include: "#gen-struct-body"
       - include: "#assert-stmt"
+      - include: "#const-decl"
   gen-struct-body:
     name: meta.control.gen.alogic
     begin: (gen)\s+(if|for)
@@ -261,7 +262,7 @@ repository:
         name: variable.alogic
       4:
         patterns:
-          - include: "#literal"
+          - include: "#expr"
   param-decl:
     name: meta.const.decl.alogic
     match: (param)\s+(\w+)\s+(\w+)\s*(?:=\s*(.+))?;

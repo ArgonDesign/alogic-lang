@@ -22,6 +22,7 @@ struct intra_angle_est_bin_map_weight_output_t {
   static assert FOO != 0, "Parameter FOO must not be zero";
   static assert FOO != 32,
     "Parameter FOO must not be 32, testing a multiline static assert";
+  const uint FOO_BAR = FOO + 2;
   bool use128;
   u22 allowed_sizes; // for luma/chroma as required
   num_cands_t num_cands; // for luma/chroma as required
@@ -93,6 +94,8 @@ fsm cake
   out sync greedy cake_t cake;
 
   typedef u8 cheesy_cake_t;
+
+  const uint BAZ = 8 % 5;
 
   uint fun_times = 19;
 
