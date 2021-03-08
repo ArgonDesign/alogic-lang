@@ -25,7 +25,7 @@ repository:
         name: entity.name.type.alogic
   from-import-stmt:
     name: meta.import.alogic
-    match: (from)\s+(\".*\")\s+(import)\s+([a-zA-Z_][a-zA-Z0-9_\.]*)(?:\s+(as)\s*(\w+))?;
+    match: (from)\s+(\".*\")\s+(import)\s+(?:([a-zA-Z_][a-zA-Z0-9_\.]*)|(\*))(?:\s+(as)\s*(\w+))?;
     captures:
       1:
         name: keyword.alogic
@@ -36,8 +36,10 @@ repository:
       4:
         name: entity.name.type.alogic
       5:
-        name: keyword.alogic
+        name: meta.import.all
       6:
+        name: keyword.alogic
+      7:
         name: entity.name.type.alogic
   typedef-decl:
     name: meta.typedef.alogic
@@ -224,6 +226,7 @@ repository:
       - include: "#param-decl"
       - include: "#const-decl"
       - include: "#port-decl"
+      - include: "#typedef-decl"
       - include: "#comment"
   port-decl:
     name: meta.port.in.alogic

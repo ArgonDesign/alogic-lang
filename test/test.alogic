@@ -9,6 +9,9 @@ from "cake" import cheese;
 from "cake/cheese" import something;
 from "cake/cheese" import something as bread;
 
+from "./cake" import cheese;
+from "cake" import *;
+
 struct intra_angle_est_bin_map_weight_output_t {
   bool use128;
   u22 allowed_sizes; // for luma/chroma as required
@@ -66,6 +69,8 @@ fsm cake
   out sync ready cake_t cake;
   out sync accept cake_t cake;
   out sync greedy cake_t cake;
+
+  typedef u8 cheesy_cake_t;
 
   uint fun_times = 19;
 
@@ -184,6 +189,8 @@ network net {
 
   param uint CHEESE = 1'h7;
   const i32 VALUE = 9;
+
+  typedef u8 cheesy_cake2_t;
 
   gen if (a + (b + c)) {
     out sync ready u9 fun;
