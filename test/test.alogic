@@ -13,6 +13,7 @@ from "./cake" import cheese;
 from "cake" import *;
 
 struct intra_angle_est_bin_map_weight_output_t {
+  param uint FOO;
   bool use128;
   u22 allowed_sizes; // for luma/chroma as required
   num_cands_t num_cands; // for luma/chroma as required

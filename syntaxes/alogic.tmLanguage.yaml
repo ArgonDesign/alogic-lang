@@ -68,6 +68,7 @@ repository:
           - include: "#struct-body"
   struct-body:
     patterns:
+      - include: "#param-decl"
       - include: "#field-decl"
       - include: "#function"
       - include: "#comment"
