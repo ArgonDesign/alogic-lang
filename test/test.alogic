@@ -92,6 +92,8 @@ fsm cake
   out sync ready cake_t cake;
   out sync accept cake_t cake;
   out sync greedy cake_t cake;
+  out sync ready bubble cake_t cake;
+  out sync ready bubble bubble cake_t cake;
 
   typedef u8 cheesy_cake_t;
 

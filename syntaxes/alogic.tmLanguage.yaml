@@ -249,7 +249,7 @@ repository:
         name: variable.alogic
   flow-control-type:
     name: keyword.alogic
-    match: sync(\s+(ready|accept))?
+    match: sync(\s+(ready|accept)(\s+(bubble))*)?
   const-decl:
     name: meta.const.decl.alogic
     match: (const)\s+(\w+)\s+(\w+)\s*=\s*(.+);
