@@ -311,6 +311,24 @@ repository:
       3:
         patterns:
           - include: "#expr"
+  increment-stmt:
+    name: meta.variable.increment.alogic
+    match: (\w+(?:\[.+\])?)(\+{2});
+    captures:
+      1:
+        patterns:
+          - include: "#lvalue"
+      2:
+        name: keyword.operator
+  decrement-stmt:
+    name: meta.variable.decrement.alogic
+    match: (\w+(?:\[.+\])?)(\-{2});
+    captures:
+      1:
+        patterns:
+          - include: "#lvalue"
+      2:
+        name: keyword.operator
   expr:
     patterns:
       - include: "#method-invocation"
@@ -552,6 +570,8 @@ repository:
       - include: "#variable-decl"
       - include: "#variable-assignment"
       - include: "#variable-shorthand-assignment"
+      - include: "#increment-stmt"
+      - include: "#decrement-stmt"
       - include: "#const-decl"
       - include: "#unreachable-stmt"
       - include: "#method-invocation"

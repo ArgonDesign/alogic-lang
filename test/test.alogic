@@ -51,8 +51,9 @@ struct intra_angle_est_bin_map_weight_output_t {
     return chroma;
   }
 
-  void increment() {
+  void increment_and_stuff() {
     if (num_cands == 4) {
+      num_cands--;
       return;
     }
     num_cands++;
