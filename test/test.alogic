@@ -50,6 +50,13 @@ struct intra_angle_est_bin_map_weight_output_t {
   bool get_chroma() {
     return chroma;
   }
+
+  void increment() {
+    if (num_cands == 4) {
+      return;
+    }
+    num_cands++;
+  }
 }
 
 typedef u3 angle_delta_unsigned_t;

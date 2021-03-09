@@ -609,7 +609,7 @@ repository:
         name: keyword.control.alogic
   return-stmt:
     name: meta.control.return.alogic
-    match: (return)\s+(.+);
+    match: (return)(?:\s+(.+))?;
     captures:
       1:
         name: keyword.control.alogic
