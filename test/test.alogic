@@ -60,8 +60,13 @@ struct intra_angle_est_bin_map_weight_output_t {
   }
 }
 
+const uint CLOG2_TEST = 1 + $clog2(FOO);
+const uint BITS_TEST = 1 + @bits(FOO);
+const uint MSB_TEST = 1 + @msb(FOO);
+
 typedef intra_angle_est_bin_map_weight_output_t(FOO=1) foo_new_t;
 typedef intra_angle_est_bin_map_weight_output_t(FOO=$clog2(5)) foo_new_t;
+
 typedef uint(5) baz_t;
 
 typedef u3 angle_delta_unsigned_t;
@@ -70,9 +75,10 @@ struct angle_delta_funcs {
   absolute value of the signed delta this represents. */
   static u2 unsigned_to_abs_signed(angle_delta_unsigned_t d) {
     u2 output;
+    i3 foo = @sx(3, 1);
     case (d) {
-      3'd0, 3'd6: output = 2'd3;
-      3'd1, 3'd5: output = 2'd2;
+      3'd0, 3'd6: output = @ex(1'b1, 2, 1'b1);
+      3'd1, 3'd5: output = @zx(2, 1'b0);
       3'd2, 3'd4: output = 2'd1;
       default: {
         assert d == 3'd3;
@@ -256,7 +262,7 @@ network net {
 
   cake = new cake();
 
-  cake2 = new cake(UNSIZED_BINARY);
+  cake2 = new cake(UNSIZED_BINARY = @bits(port_t));
 
   cheese = new cheese(with_chilli = true, cheese = 1'd8);
 

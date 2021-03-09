@@ -337,6 +337,10 @@ repository:
     patterns:
       - include: "#method-invocation"
       - include: "#builtin-dollar-function-invocation"
+      - include: "#builtin-atbits-invocation"
+      - include: "#builtin-msb-invocation"
+      - include: "#builtin-ex-invocation"
+      - include: "#builtin-zsx-invocation"
       - name: meta.expr.parenthetical.alogic
         match: \((.+)\)
         captures:
@@ -386,6 +390,51 @@ repository:
       1:
         name: entity.name.function
       2:
+        patterns:
+          - include: "#expr"
+  builtin-atbits-invocation:
+    name: meta.function.invocation.builtin.atbits.alogic
+    match: (@bits)\s*\((.*)\)
+    captures:
+      1:
+        name: entity.name.function
+      2:
+        patterns:
+          - include: "#expr"
+  builtin-msb-invocation:
+    name: meta.function.invocation.builtin.msb.alogic
+    match: (@msb)\s*\((.*)\)
+    captures:
+      1:
+        name: entity.name.function
+      2:
+        patterns:
+          - include: "#expr"
+  builtin-ex-invocation:
+    name: meta.function.invocation.builtin.ex.alogic
+    match: (@ex)\s*\((.*)\s*,\s*(.*)\s*,\s*(.*)\)
+    captures:
+      1:
+        name: entity.name.function
+      2:
+        patterns:
+          - include: "#expr"
+      3:
+        patterns:
+          - include: "#expr"
+      4:
+        patterns:
+          - include: "#expr"
+  builtin-zsx-invocation:
+    name: meta.function.invocation.builtin.zsx.alogic
+    match: (@(?:s|z)x)\s*\((.*)\s*,\s*(.*)\)
+    captures:
+      1:
+        name: entity.name.function
+      2:
+        patterns:
+          - include: "#expr"
+      3:
         patterns:
           - include: "#expr"
   if-stmt:
