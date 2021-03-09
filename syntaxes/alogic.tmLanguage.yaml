@@ -44,13 +44,17 @@ repository:
         name: entity.name.type.alogic
   typedef-decl:
     name: meta.typedef.alogic
-    match: (typedef)\s+(\w+)\s+(\w+);
+    match: (typedef)\s+(\w+)(\(.*\))?\s+(\w+);
     captures:
       1:
         name: keyword.alogic
       2:
         name: entity.name.type.alogic
       3:
+        name: meta.entity.instantiation.params.alogic
+        patterns:
+          - include: "#param-def"
+      4:
         name: entity.name.type.alogic
   struct-decl:
     name: meta.struct.alogic
