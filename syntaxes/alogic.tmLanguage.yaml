@@ -594,12 +594,13 @@ repository:
         name: keyword.control.alogic
   return-stmt:
     name: meta.control.return.alogic
-    match: (return)\s+(:?(\w+))?;
+    match: (return)\s+(.+);
     captures:
       1:
         name: keyword.control.alogic
       2:
-        name: variable
+        patterns:
+          - include: "#expr"
   unreachable-stmt:
     name: meta.control.unreachable.alogic
     match: (unreachable);
