@@ -124,6 +124,7 @@ fsm cake
   /* A long comment */
   void main()
   {
+    wait cake.valid;
     u32 a;
     u32 b = 1;
     a = 1;

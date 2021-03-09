@@ -540,6 +540,7 @@ repository:
       - include: "#case-stmt"
       - include: "#loop-stmt"
       - include: "#return-stmt"
+      - include: "#wait-stmt"
       - include: "#goto-stmt"
       - include: "#fence-stmt"
       - include: "#break-stmt"
@@ -609,6 +610,15 @@ repository:
   return-stmt:
     name: meta.control.return.alogic
     match: (return)\s+(.+);
+    captures:
+      1:
+        name: keyword.control.alogic
+      2:
+        patterns:
+          - include: "#expr"
+  wait-stmt:
+    name: meta.control.wait.alogic
+    match: (wait)\s+(.+);
     captures:
       1:
         name: keyword.control.alogic
