@@ -299,6 +299,18 @@ repository:
       2:
         patterns:
           - include: "#expr"
+  variable-shorthand-assignment:
+    name: meta.variable.shorthandassignment.alogic
+    match: (\w+(?:\[.+\])?)\s*(\*=|\/=|%=|\+=|-=|&=|\|=|\^=|>>=|<<=|>>>=|<<<=)\s*(.*);
+    captures:
+      1:
+        patterns:
+          - include: "#lvalue"
+      2:
+        name: keyword.operator
+      3:
+        patterns:
+          - include: "#expr"
   expr:
     patterns:
       - include: "#method-invocation"
@@ -538,6 +550,7 @@ repository:
       - include: "#expr-stmt"
       - include: "#variable-decl"
       - include: "#variable-assignment"
+      - include: "#variable-shorthand-assignment"
       - include: "#const-decl"
       - include: "#unreachable-stmt"
       - include: "#method-invocation"

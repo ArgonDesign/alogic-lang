@@ -127,6 +127,8 @@ fsm cake
     u32 a;
     u32 b = 1;
     a = 1;
+    a >>= 2;
+    {a, b} /= 4;
     fun_t badger = cake.read();
     if (badger /* cake */) {
       salmon.write(1);
