@@ -540,6 +540,7 @@ repository:
       - include: "#variable-assignment"
       - include: "#const-decl"
       - include: "#unreachable-stmt"
+      - include: "#method-invocation"
   expr-stmt:
     name: meta.stmt.expr.alogic
     match: \b(.+);
