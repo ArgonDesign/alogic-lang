@@ -362,16 +362,21 @@ repository:
   slice:
     name: meta.variable.slice.alogic
     patterns:
-      - match: "(\\d+)([+-]?:)(\\d+)"
+      - match: (.*)([+-]?:)(.*)
         captures:
           1:
-            name: constant.numeric.alogic
+            patterns:
+              - include: "#expr"
           2:
             name: keyword.operator
           3:
-            name: constant.numeric.alogic
-      - match: \d+
-        name: constant.numeric.alogic
+            patterns:
+              - include: "#expr"
+      - match: (.*)
+        captures:
+          1:
+            patterns:
+              - include: "#expr"
   method-invocation:
     name: meta.function.invocation.alogic
     match: (?:(\w+)\.)?(\w+)\s*\((.*)\)

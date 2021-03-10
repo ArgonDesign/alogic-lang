@@ -167,6 +167,16 @@ fsm cake
 
     assert cake >= cheese, "CAKE ISN'T BETTER THAN CHEESE!";
 
+    foo = var[5 -: 2];
+    foo = var[5:8];
+    foo = var[@bits(baz)];
+    foo = var[5 + 2 +: MY_CONST];
+    foo = var[@bits(baz) +: 16 * 4];
+
+    assert x4_rightmost_tmp[(@bits(x4_rightmost_tmp) - 1)] == 0,
+          "Top bit of x4_rightmost_tmp must always be zero";
+    xy4_sb_t x4_rightmost = x4_rightmost_tmp[0 +: @bits(xy4_sb_t)];
+
     for (uint i = 0; i < 7 /* cake */; ++i) {
       if (cheese) {
         bool grapes = true;
