@@ -137,6 +137,11 @@ fsm cake
   const u1[NUM_BSIZES_SUB_8X8_AND_SMALLER] log2_w4_8x8_rst_val = 4'hC;
   const u1 [NUM_BSIZES_SUB_8X8_AND_SMALLER] log2_w4_8x8_rst_val = 4'hC;
 
+  uint(5 + @bits(hood)) foo;
+  uint(@bits(xy4_sb_t) + 1)[4 + @bits(foo)] x4_rightmost_p1;
+
+  const uint(5 + @bits(hood))[4 + @bits(my_var)] foo = 4'd5;
+
   gen if (a + (b + c)) {
     out sync ready u9 fun;
   }
@@ -155,6 +160,8 @@ fsm cake
   /* A long comment */
   void main()
   {
+    uint(@bits(xy4_sb_t) + 1) x4_rightmost_p1 = cfg.angle_cfg.use128 ? 6'd32 : 6'd16;
+    const uint(5 + @bits(hood))[4 + @bits(my_var)] foo = 4'd5;
     wait cake.valid;
     u32 a;
     u32 b = 1;

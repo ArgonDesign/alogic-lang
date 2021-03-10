@@ -256,18 +256,23 @@ repository:
     match: sync(\s+(ready|accept)(\s+(bubble))*)?
   const-decl:
     name: meta.const.decl.alogic
-    match: (const)\s+(\w+)(?:\s*\[(.*)\])?\s+(\w+)\s*=\s*(.+);
+    match: (const)\s+(?:(\w+)|(?:(u?int)\s*\((.*)\)))(?:\s*\[(.*)\])?\s+(\w+)\s*=\s*(.+);
     captures:
       1:
         name: keyword.alogic
       2:
         name: entity.name.type.alogic
       3:
+        name: entity.name.type.alogic
+      4:
         patterns:
           - include: "#expr"
-      4:
-        name: variable.alogic
       5:
+        patterns:
+          - include: "#expr"
+      6:
+        name: variable.alogic
+      7:
         patterns:
           - include: "#expr"
   param-decl:
@@ -287,16 +292,21 @@ repository:
     patterns:
       - include: "#field-decl"
       - name: meta.variable.decl.alogic
-        match: (\w+)(?:\s*\[(.*)\])?\s+(\w+)\s*=\s*(.+);
+        match: (?:(\w+)|(?:(u?int)\s*\((.*)\)))(?:\s*\[(.*)\])?\s+(\w+)\s*=\s*(.+);
         captures:
           1:
             name: entity.name.type.alogic
           2:
+            name: entity.name.type.alogic
+          3:
             patterns:
               - include: "#expr"
-          3:
-            name: variable.alogic
           4:
+            patterns:
+              - include: "#expr"
+          5:
+            name: variable.alogic
+          6:
             patterns:
               - include: "#expr"
   variable-assignment:
@@ -554,16 +564,21 @@ repository:
       - include: "#stmt-block-body"
   field-decl:
     name: meta.field.decl.alogic
-    match: (\w+)(?:\s*\[(.*)\])?\s+(\w+)(?:#*\[(.*)])?;
+    match: (?:(\w+)|(?:(u?int)\s*\((.*)\)))(?:\s*\[(.*)\])?\s+(\w+)(?:#*\[(.*)])?;
     captures:
       1:
         name: entity.name.type.alogic
       2:
+        name: entity.name.type.alogic
+      3:
         patterns:
           - include: "#expr"
-      3:
-        name: variable.alogic
       4:
+        patterns:
+          - include: "#expr"
+      5:
+        name: variable.alogic
+      6:
         patterns:
           - include: "#expr"
   fence-block:
