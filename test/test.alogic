@@ -57,6 +57,9 @@ struct intra_angle_est_bin_map_weight_output_t {
       return;
     }
     num_cands++;
+    if (get_chroma()) {
+      num_cands -= 2;
+    }
   }
 }
 

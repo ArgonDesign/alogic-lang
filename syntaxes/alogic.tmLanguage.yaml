@@ -374,7 +374,7 @@ repository:
         name: constant.numeric.alogic
   method-invocation:
     name: meta.function.invocation.alogic
-    match: (\w+)\.(\w+)\s*\((.*)\)
+    match: (?:(\w+)\.)?(\w+)\s*\((.*)\)
     captures:
       1:
         name: variable.alogic
