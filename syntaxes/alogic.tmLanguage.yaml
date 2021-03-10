@@ -543,14 +543,15 @@ repository:
       - include: "#stmt-block-body"
   field-decl:
     name: meta.field.decl.alogic
-    match: (\w+)\s+(\w+)(?:#\[(\w+)])?;
+    match: (\w+)\s+(\w+)(?:#\[(.*)])?;
     captures:
       1:
         name: entity.name.type.alogic
       2:
         name: variable.alogic
       3:
-        name: variable.alogic
+        patterns:
+          - include: "#expr"
   fence-block:
     name: meta.block.fence.alogic
     begin: (fence)

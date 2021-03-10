@@ -187,6 +187,12 @@ fsm cake
       u8 a = (1 + 2);
     }
 
+    gen for (uint N < 2) {
+      gen for (uint M < 4) {
+        bool do_accum#[bucket_idx, bin_idx];
+      }
+    }
+
     cheese.write(badger);
     while (cheese) {
       u8 cake = jam + sponge - butter_cream;
