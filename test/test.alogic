@@ -127,6 +127,8 @@ fsm cake
 
   uint fun_times = 19;
 
+  u3 my_distributed_mem[5];
+
   gen if (a + (b + c)) {
     out sync ready u9 fun;
   }
