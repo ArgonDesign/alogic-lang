@@ -129,6 +129,14 @@ fsm cake
 
   u3 my_distributed_mem[5];
 
+  u3[4 + MY_CONST] my_vector;
+  u3[4] my_vector2 = 'hood;
+  u3 [4 + MY_CONST] my_vector3;
+  u3 [4] my_vector4 = 'hood;
+
+  const u1[NUM_BSIZES_SUB_8X8_AND_SMALLER] log2_w4_8x8_rst_val = 4'hC;
+  const u1 [NUM_BSIZES_SUB_8X8_AND_SMALLER] log2_w4_8x8_rst_val = 4'hC;
+
   gen if (a + (b + c)) {
     out sync ready u9 fun;
   }

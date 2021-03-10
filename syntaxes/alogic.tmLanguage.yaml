@@ -256,15 +256,18 @@ repository:
     match: sync(\s+(ready|accept)(\s+(bubble))*)?
   const-decl:
     name: meta.const.decl.alogic
-    match: (const)\s+(\w+)\s+(\w+)\s*=\s*(.+);
+    match: (const)\s+(\w+)(?:\s*\[(.*)\])?\s+(\w+)\s*=\s*(.+);
     captures:
       1:
         name: keyword.alogic
       2:
         name: entity.name.type.alogic
       3:
-        name: variable.alogic
+        patterns:
+          - include: "#expr"
       4:
+        name: variable.alogic
+      5:
         patterns:
           - include: "#expr"
   param-decl:
@@ -282,17 +285,20 @@ repository:
           - include: "#literal"
   variable-decl:
     patterns:
-     - include: "#field-decl"
-     - name: meta.variable.decl.alogic
-       match: (\w+)\s+(\w+)\s*=\s*(.+);
-       captures:
-         1:
-           name: entity.name.type.alogic
-         2:
-           name: variable.alogic
-         3:
-           patterns:
-             - include: "#expr"
+      - include: "#field-decl"
+      - name: meta.variable.decl.alogic
+        match: (\w+)(?:\s*\[(.*)\])?\s+(\w+)\s*=\s*(.+);
+        captures:
+          1:
+            name: entity.name.type.alogic
+          2:
+            patterns:
+              - include: "#expr"
+          3:
+            name: variable.alogic
+          4:
+            patterns:
+              - include: "#expr"
   variable-assignment:
     name: meta.variable.assignment.alogic
     match: (\w+(?:\[.+\])?)\s*=\s*(.*);
@@ -548,13 +554,16 @@ repository:
       - include: "#stmt-block-body"
   field-decl:
     name: meta.field.decl.alogic
-    match: (\w+)\s+(\w+)(?:#*\[(.*)])?;
+    match: (\w+)(?:\s*\[(.*)\])?\s+(\w+)(?:#*\[(.*)])?;
     captures:
       1:
         name: entity.name.type.alogic
       2:
-        name: variable.alogic
+        patterns:
+          - include: "#expr"
       3:
+        name: variable.alogic
+      4:
         patterns:
           - include: "#expr"
   fence-block:
