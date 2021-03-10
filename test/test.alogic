@@ -173,6 +173,10 @@ fsm cake
 
     }
 
+    if (log2_w4_8x8_and_smaller[0] == 1'b1 && log2_h4_8x8_and_smaller[0] == 1'b1) {
+
+    }
+
     assert cake >= cheese, "CAKE ISN'T BETTER THAN CHEESE!";
 
     foo = var[5 -: 2];
