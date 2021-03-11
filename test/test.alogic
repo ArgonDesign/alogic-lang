@@ -80,11 +80,13 @@ struct angle_delta_funcs {
     u2 output;
     i3 foo = @sx(3, 1);
     case (d) {
-      3'd0, 3'd6: output = @ex(1'b1, 2, 1'b1);
-      3'd1, 3'd5: output = @zx(2, 1'b0);
+      3'd0, 3'd6: output = @ex(1'b1, 2, 1'b1); // hello
+      // another hello
+      3'd1, 3'd5: output = @zx(2, 1'b0); /* hello again */
       3'd2, 3'd4: output = 2'd1;
       default: {
         assert d == 3'd3;
+        // hello
         output = 2'd0;
         break;
       }

@@ -538,6 +538,7 @@ repository:
         patterns:
           - include: "#case-arm-block"
           - include: "#case-arm-stmt"
+          - include: "#comment"
   case-arm-stmt:
     name: meta.control.case.arm.alogic
     begin: "(.+):"
