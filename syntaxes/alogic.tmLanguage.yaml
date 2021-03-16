@@ -133,6 +133,7 @@ repository:
   fsm-entity-body:
     patterns:
       - include: "#common-entity-body"
+      - include: "#sram-decl"
       - include: "#variable-decl"
       - include: "#fence-block"
       - include: "#function"
@@ -255,6 +256,26 @@ repository:
   flow-control-type:
     name: keyword.alogic
     match: sync(\s+(ready|accept)(\s+(bubble))*)?
+  sram-decl:
+    name: meta.sram.decl.alogic
+    match: (sram)\s+(?:(wire)\s+)?(?:(\w+)|(?:(u?int)\s*\((.*)\)))\s+(\w+)\s*\[(.*)\];
+    captures:
+      1:
+        name: keyword.alogic
+      2:
+        name: keyword.alogic
+      3:
+        name: entity.name.type.alogic
+      4:
+        name: entity.name.type.alogic
+      5:
+        patterns:
+          - include: "#expr"
+      6:
+        name: variable.alogic
+      7:
+        patterns:
+          - include: "#expr"
   const-decl:
     name: meta.const.decl.alogic
     match: (const)\s+(?:(\w+)|(?:(u?int)\s*\((.*)\)))(?:\s*\[(.*)\])?\s+(\w+)\s*=\s*(.+);

@@ -159,6 +159,13 @@ fsm cake
   static assert NUM_TIGERS > 7,
                 "Need more tigers!";
 
+  sram wire uint(2) store[79 * 6];
+  sram bar_t store2[ANGLE_STORE_WORDS + @bits(foo)];
+
+  gen if (MY_CONST < 5) {
+    sram wire u1 store3[42];
+  }
+
   /* A long comment */
   void main()
   {
@@ -323,6 +330,13 @@ network net {
   fence {
 
   }
+
+  sram wire uint(2) store[79 * 6];
+  sram bar_t store2[ANGLE_STORE_WORDS + @bits(foo)];
+
+  gen if (MY_CONST < 5) {
+    sram wire u1 store3[42];
+  }
 }
 
 verbatim entity arb {
@@ -342,3 +356,10 @@ verbatim entity arb {
 // These shouldn't highlight
 
 param u10 a_name = 7;
+
+sram wire uint(2) store[79 * 6];
+sram bar_t store2[ANGLE_STORE_WORDS + @bits(foo)];
+
+gen if (MY_CONST < 5) {
+  sram wire u1 store3[42];
+}
