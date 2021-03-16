@@ -282,6 +282,7 @@ network net {
   out           bool   cake;
 
   param uint CHEESE = 1'h7;
+  static assert CHEESE != 12, "CHEESE mustn't be a dozen";
   const i32 VALUE = 9;
 
   typedef u8 cheesy_cake2_t;

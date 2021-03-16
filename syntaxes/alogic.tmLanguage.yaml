@@ -175,6 +175,7 @@ repository:
     patterns:
       - include: "#common-entity-body"
       - include: "#port-assignment"
+      - include: "#assert-stmt"
       - include: "#entity-instantiation"
       - include: "#singleton-fsm-entity-decl"
       - include: "#gen-network-body"
