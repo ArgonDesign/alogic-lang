@@ -301,6 +301,7 @@ network net {
 
   typedef u8 cheesy_cake2_t;
 
+
   gen if (a + (b + c)) {
     out sync ready u9 fun;
   }
@@ -312,6 +313,8 @@ network net {
   gen for (uint P < 8) {
     in wire porty_mc_port_face;
   }
+
+  pipeline satd_cmd_t satd_cmd;
 
   new fsm singleton {
 

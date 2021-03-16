@@ -177,6 +177,7 @@ repository:
       - include: "#common-entity-body"
       - include: "#port-assignment"
       - include: "#assert-stmt"
+      - include: "#pipeline-decl"
       - include: "#entity-instantiation"
       - include: "#singleton-fsm-entity-decl"
       - include: "#gen-network-body"
@@ -276,6 +277,24 @@ repository:
       7:
         patterns:
           - include: "#expr"
+  pipeline-decl:
+    name: meta.pipeline.decl.alogic
+    match: (pipeline)\s+(?:(\w+)|(?:(u?int)\s*\((.*)\)))(?:\s*\[(.*)\])?\s+(\w+);
+    captures:
+      1:
+        name: keyword.alogic
+      2:
+        name: entity.name.type.alogic
+      3:
+        name: entity.name.type.alogic
+      4:
+        patterns:
+          - include: "#expr"
+      5:
+        patterns:
+          - include: "#expr"
+      6:
+        name: variable.alogic
   const-decl:
     name: meta.const.decl.alogic
     match: (const)\s+(?:(\w+)|(?:(u?int)\s*\((.*)\)))(?:\s*\[(.*)\])?\s+(\w+)\s*=\s*(.+);
