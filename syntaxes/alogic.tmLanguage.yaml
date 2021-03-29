@@ -620,6 +620,7 @@ repository:
     patterns:
       - include: "#case-arm-stmt"
       - include: "#case-arm-block"
+      - include: "#comment"
   field-decl:
     name: meta.field.decl.alogic
     match: (?:(\w+)|(?:(u?int)\s*\((.*)\)))(?:\s*\[(.*)\])?\s+(\w+)(?:#*\[(.*)])?;

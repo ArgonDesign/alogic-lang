@@ -61,6 +61,38 @@ struct intra_angle_est_bin_map_weight_output_t {
       num_cands -= 2;
     }
   }
+
+  bool has_top_right(bool ss_x, bool ss_y) {
+    bool is_vert_a = partition == PARTITION_VERT_A;
+    // Bump subsampled 4 sized dimensions to 8
+    u3 plane_log2_w4 = ss_x && log2_w4 == 0 ? 1 : log2_w4;
+    u3 plane_log2_h4 = ss_y && log2_h4 == 0 ? 1 : log2_h4;
+    u5 blk_col = x4 >> plane_log2_w4;
+    u5 blk_row = y4 >> plane_log2_h4;
+    // Find trailing zeros of blk_row + plane_log2_h4
+    u3 row_tz;
+    case (1'b1) {
+        gen for (uint i < 5) {
+          /* foo */
+          blk_row[i]: row_tz = i + plane_log2_h4; // hello
+        }
+        default: row_tz = 3'd5; // NOTE(James): The 5 here is log2(superblock size in mi units)
+    }
+    // Find trailing ones of blk_col + plane_log2_w4
+    u3 col_to;
+    case (1'b0) {
+        gen for (uint i < 5) {
+          blk_col[i]: col_to = i + plane_log2_w4;
+        }
+        default: col_to = 3'd5; // NOTE(James): The 5 here is log2(superblock size in mi units)
+    }
+    // If we're a square block in a VERT_A partition in an odd row then top right isn't available when it normally
+    // would be
+    if (is_vert_a && log2_w4 == log2_h4 && blk_row[0]) {
+        return false;
+    }
+    return row_tz >= col_to;
+  }
 }
 
 const uint CLOG2_TEST = 1 + $clog2(FOO);
