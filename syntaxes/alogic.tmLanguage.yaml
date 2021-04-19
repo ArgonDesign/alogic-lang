@@ -238,6 +238,7 @@ repository:
       - include: "#const-decl"
       - include: "#port-decl"
       - include: "#typedef-decl"
+      - include: "#struct-decl"
       - include: "#comment"
   port-decl:
     name: meta.port.in.alogic
