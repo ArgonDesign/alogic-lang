@@ -850,7 +850,7 @@ repository:
       - include: "#string"
   entity-instantiation:
     name: meta.entity.instantiation.alogic
-    match: (\w+)\s*=\s*(new)\s*(\w+)\s*\((.*)\);
+    match: (\w+)\s*=\s*(new)\s*(\w+)(?:\s*\((.*)\))?;
     captures:
       1:
         name: variable.alogic
