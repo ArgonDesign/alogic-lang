@@ -54,6 +54,7 @@ repository:
         name: meta.entity.instantiation.params.alogic
         patterns:
           - include: "#param-def"
+          - include: "#expr"
       4:
         name: entity.name.type.alogic
   struct-decl:

@@ -103,6 +103,8 @@ typedef intra_angle_est_bin_map_weight_output_t(FOO=1) foo_new_t;
 typedef intra_angle_est_bin_map_weight_output_t(FOO=$clog2(5)) foo_new_t;
 
 typedef uint(5) baz_t;
+typedef uint(BITS + COST_ACCUM_EXTRA_BITS) cost_t;
+typedef bar(BITS, MODE) cost_2_t;
 
 typedef u3 angle_delta_unsigned_t;
 struct angle_delta_funcs {
