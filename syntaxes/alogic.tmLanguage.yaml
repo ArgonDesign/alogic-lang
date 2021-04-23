@@ -874,7 +874,8 @@ repository:
         patterns:
           - include: "#param-def"
   port-assignment:
-    match: ([a-zA-Z0-9_\.]+)\s*->\s*([a-zA-Z0-9_\.]+);
+    name: meta.network.port.assignment
+    match: ([a-zA-Z0-9_]+(?:#\[[^\[\]]+\])?(?:\.[a-zA-Z0-9_]+(?:#\[[^\[\]]+\])?)?)\s*->\s*([a-zA-Z0-9_]+(?:#\[[^\[\]]+\])?(?:\.[a-zA-Z0-9_]+(?:#\[[^\[\]]+\])?)?);
     captures:
       1:
         patterns:
@@ -883,11 +884,15 @@ repository:
         patterns:
           - include: "#port-reference"
   port-reference:
-    match: (\w+)(?:\.(.+))?
+    name: meta.network.port.assignment.reference
+    match: ([a-zA-Z0-9_]+)(?:#\[([^\[\]]+)\])?(?:\.((?:[a-zA-Z0-9_]+)(?:#\[(?:[^\[\]]+)\])?))?
     captures:
       1:
         name: variable.alogic
       2:
+        patterns:
+          - include: "#expr"
+      3:
         patterns:
           - include: "#port-reference"
   literal:
