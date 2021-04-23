@@ -850,15 +850,18 @@ repository:
       - include: "#string"
   entity-instantiation:
     name: meta.entity.instantiation.alogic
-    match: (\w+)\s*=\s*(new)\s*(\w+)(?:\s*\((.*)\))?;
+    match: (\w+)(?:#\[(.*)\])?\s*=\s*(new)\s*(\w+)(?:\s*\((.*)\))?;
     captures:
       1:
         name: variable.alogic
       2:
-        name: keyword.alogic
+        patterns:
+          - include: "#expr"
       3:
-        name: entity.name.type.alogic
+        name: keyword.alogic
       4:
+        name: entity.name.type.alogic
+      5:
         name: meta.entity.instantiation.params.alogic
         patterns:
           - include: "#param-def"
