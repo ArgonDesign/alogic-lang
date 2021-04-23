@@ -242,7 +242,7 @@ repository:
       - include: "#comment"
   port-decl:
     name: meta.port.in.alogic
-    match: (in|out)\s+(.+\s)?(\w+)\s+(\w+)(?:#\[(\w+)\])?;
+    match: (in|out)\s+(.+\s)?(\w+)(?:\s*\((.*)\))?(?:\s*\[(.*)\])?\s+(\w+)(?:#\[(\w+)\])?;
     captures:
       1:
         name: keyword.alogic
@@ -252,8 +252,14 @@ repository:
       3:
         name: entity.name.type.alogic
       4:
-        name: variable.alogic
+        patterns:
+          - include: "#expr"
       5:
+        patterns:
+          - include: "#expr"
+      6:
+        name: variable.alogic
+      7:
         name: variable.alogic
   flow-control-type:
     name: keyword.alogic
@@ -334,26 +340,27 @@ repository:
     patterns:
       - include: "#field-decl"
       - name: meta.variable.decl.alogic
-        match: (?:(\w+)|(?:(u?int)\s*\((.*)\)))(?:\s*\[(.*)\])?\s+(\w+)\s*=\s*(.+);
+        match: (\w+)(?:\s*\((.*)\))?(?:\s*\[(.*)\])?\s+(\w+)(?:#?\[(.*)])?\s*=\s*(.+);
         captures:
           1:
             name: entity.name.type.alogic
           2:
-            name: entity.name.type.alogic
+            patterns:
+              - include: "#expr"
           3:
             patterns:
               - include: "#expr"
           4:
+            name: variable.alogic
+          5:
             patterns:
               - include: "#expr"
-          5:
-            name: variable.alogic
           6:
             patterns:
               - include: "#expr"
   variable-assignment:
     name: meta.variable.assignment.alogic
-    match: (\w+(?:\[.+\])?)\s*=\s*(.*);
+    match: (\w+(?:#?\[.+\])?)\s*=\s*(.*);
     captures:
       1:
         patterns:
@@ -363,7 +370,7 @@ repository:
           - include: "#expr"
   variable-shorthand-assignment:
     name: meta.variable.shorthandassignment.alogic
-    match: (\w+(?:\[.+\])?)\s*(\*=|\/=|%=|\+=|-=|&=|\|=|\^=|>>=|<<=|>>>=|<<<=)\s*(.*);
+    match: (\w+(?:#?\[.+\])?)\s*(\*=|\/=|%=|\+=|-=|&=|\|=|\^=|>>=|<<=|>>>=|<<<=)\s*(.*);
     captures:
       1:
         patterns:
@@ -375,7 +382,7 @@ repository:
           - include: "#expr"
   increment-stmt:
     name: meta.variable.increment.alogic
-    match: (\w+(?:\[.+\])?)(\+{2});
+    match: (\w+(?:#?\[.+\])?)(\+{2});
     captures:
       1:
         patterns:
@@ -384,7 +391,7 @@ repository:
         name: keyword.operator
   decrement-stmt:
     name: meta.variable.decrement.alogic
-    match: (\w+(?:\[.+\])?)(\-{2});
+    match: (\w+(?:#?\[.+\])?)(\-{2});
     captures:
       1:
         patterns:
@@ -410,7 +417,7 @@ repository:
       - include: "#block-comment"
   lvalue:
     name: meta.lvalue.alogic
-    match: ([a-zA-Z_]\w*)(?:\[(.+)])?
+    match: ([a-zA-Z_]\w*)(?:#?\[(.+)])?
     captures:
       1:
         name: variable
@@ -624,21 +631,19 @@ repository:
       - include: "#comment"
   field-decl:
     name: meta.field.decl.alogic
-    match: (?:(\w+)|(?:(u?int)\s*\((.*)\)))(?:\s*\[(.*)\])?\s+(\w+)(?:#*\[(.*)])?;
+    match: (\w+)(?:\s*\((.*)\))?(?:\s*\[(.*)\])?\s+(\w+)(?:#?\[(.*)])?;
     captures:
       1:
         name: entity.name.type.alogic
       2:
-        name: entity.name.type.alogic
+        patterns:
+          - include: "#expr"
       3:
         patterns:
           - include: "#expr"
       4:
-        patterns:
-          - include: "#expr"
-      5:
         name: variable.alogic
-      6:
+      5:
         patterns:
           - include: "#expr"
   fence-block:

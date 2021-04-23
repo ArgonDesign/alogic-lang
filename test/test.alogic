@@ -146,6 +146,13 @@ fsm cake
   in sync ready cake_t cake;
   in sync accept cake_t cake;
   in sync greedy cake_t cake;
+  in sync ready uint(5) foo;
+  in sync ready combiner_cand_t(BITS) p_cand_in;
+  in sync ready combiner_cand_t(BITS, MODE) p_cand_in;
+  gen for (uint m < MODE_COUNT) {
+    out sync ready rank_cand_t(BITS) p_store_cand_out#[m];
+  }
+  in sync ready uint(BITS)[BWH_BASIS][BWH_BASIS] p_src_in;
 
   out the hood;
   out sync cake_t cake;
@@ -203,6 +210,16 @@ fsm cake
   {
     uint(@bits(xy4_sb_t) + 1) x4_rightmost_p1 = cfg.angle_cfg.use128 ? 6'd32 : 6'd16;
     const uint(5 + @bits(hood))[4 + @bits(my_var)] foo = 4'd5;
+    foo_t(1, 2) foo = 2;
+    gen for (uint a < 2) {
+      foo_t(1, 2 + 643) foo#[2];
+      u5 bar#[a] = 1;
+    }
+    baz#[2] = 2;
+    bam[2] = 3;
+    bin#[3]++;
+    bin#[3]--;
+    ban#[4] += 5;
     wait cake.valid;
     u32 a;
     u32 b = 1;
