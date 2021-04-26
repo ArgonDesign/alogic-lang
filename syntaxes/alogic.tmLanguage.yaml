@@ -928,10 +928,10 @@ repository:
       - include: "#line-comment"
       - include: "#block-comment"
   line-comment:
-    name: comment
+    name: comment.line.double-slash.alogic
     match: //.*
   block-comment:
-    name: comment
+    name: comment.block.alogic
     begin: /\*
     end: \*/
 scopeName: source.alogic
