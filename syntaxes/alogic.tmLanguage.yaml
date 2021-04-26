@@ -919,7 +919,13 @@ repository:
       - name: constant.numeric.alogic
         match: \d*'s?h[0-9a-fA-F]+\b
       - name: constant.numeric.alogic
-        match: \d+[u,s]?\b
+        match: 0b[01]+[us]?\b
+      - name: constant.numeric.alogic
+        match: 0o[0-7]+[us]?\b
+      - name: constant.numeric.alogic
+        match: 0x[0-9a-fA-F]+[us]?\b
+      - name: constant.numeric.alogic
+        match: (?:0d)?\d+[us]?\b
   boolean:
     name: keyword.alogic
     match: (true|false)
