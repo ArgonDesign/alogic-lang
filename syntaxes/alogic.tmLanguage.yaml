@@ -135,6 +135,7 @@ repository:
     patterns:
       - include: "#common-entity-body"
       - include: "#sram-decl"
+      - include: "#dpi-import-decl"
       - include: "#variable-decl"
       - include: "#fence-block"
       - include: "#function"
@@ -285,6 +286,19 @@ repository:
       7:
         patterns:
           - include: "#expr"
+  dpi-import-decl:
+    name: meta.dpi.decl.alogic
+    match: (import)\s+(\w+)\s+(\w+)\s*\((.*)\)\s*;
+    captures:
+      1:
+        name: keyword.alogic
+      2:
+        name: entity.name.type.alogic
+      3:
+        name: entity.name.function
+      4:
+        patterns:
+          - include: "#argument-decl"
   pipeline-decl:
     name: meta.pipeline.decl.alogic
     match: (pipeline)\s+(?:(\w+)|(?:(u?int)\s*\((.*)\)))(?:\s*\[(.*)\])?\s+(\w+);

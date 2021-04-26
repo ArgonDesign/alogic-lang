@@ -212,6 +212,11 @@ fsm cake
     sram wire u1 store3[42];
   }
 
+  gen if (check_intra_pred) {
+    import bool intra_check_sample(uint(bits) sample);
+  }
+  import bool intra_check_sample_always(u8 sample);
+
   /* A long comment */
   void main()
   {
