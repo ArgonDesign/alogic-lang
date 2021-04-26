@@ -1,5 +1,10 @@
 
-const u8 cheese = 4;
+const uint cheese = 4;
+const uint cheese2 = 4u;
+const int cheese3 = -4s;
+const u8 cheese4 = 4;
+const i8 cheese5 = 8'sd0;
+const i8 cheese6 = -8'sd2;
 
 import "cheese";
 import "cheese" as cake;
