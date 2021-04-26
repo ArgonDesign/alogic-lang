@@ -181,6 +181,7 @@ repository:
       - include: "#pipeline-decl"
       - include: "#entity-instantiation"
       - include: "#singleton-fsm-entity-decl"
+      - include: "#fsm-entity-decl"
       - include: "#gen-network-body"
   gen-network-body:
     name: meta.control.gen.alogic
