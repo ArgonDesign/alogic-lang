@@ -135,7 +135,6 @@ repository:
     patterns:
       - include: "#common-entity-body"
       - include: "#sram-decl"
-      - include: "#dpi-import-decl"
       - include: "#variable-decl"
       - include: "#fence-block"
       - include: "#function"
@@ -241,6 +240,7 @@ repository:
       - include: "#port-decl"
       - include: "#typedef-decl"
       - include: "#struct-decl"
+      - include: "#dpi-import-decl"
       - include: "#comment"
   port-decl:
     name: meta.port.in.alogic
