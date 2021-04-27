@@ -768,7 +768,7 @@ repository:
           - include: "#variable-decl"
       3:
         patterns:
-          - include: "#expr-stmt"
+          - include: "#expr"
       4:
         patterns:
           - include: "#expr"
