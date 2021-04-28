@@ -26,6 +26,17 @@ bool my_combinational_func(u8 a, u2 b) {
   }
 }
 
+struct foo_t {
+  u8 y;
+  uint(WIDTH) x;
+  uint(WIDTH)[2] get_x(u8 foo) {
+    return x;
+  }
+  foo_t(WIDTH,foo=bar) get_x(u8 foo) {
+    return x;
+  }
+}
+
 struct intra_angle_est_bin_map_weight_output_t {
   param uint FOO;
   static assert FOO != 0, "Parameter FOO must not be zero";
