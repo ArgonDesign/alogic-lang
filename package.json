@@ -2,7 +2,7 @@
     "name": "alogic-lang",
     "displayName": "alogic-lang",
     "description": "Visual Studio Code language support for alogic.",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "engines": {
         "vscode": "^1.36.0"
     },
