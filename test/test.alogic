@@ -253,6 +253,8 @@ fsm cake
       salmon.write(3);
     }
     $display("%0d", foo);
+    u8 dout;
+    dout = 5;
 
     if (true) {
 
