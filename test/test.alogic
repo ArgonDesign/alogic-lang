@@ -297,8 +297,12 @@ fsm cake
     }
 
     do {
-
+      // hello
+      u5 foo;
     } while (true /* cake */);
+
+    do {
+    } while (foo + 1 /* cake */ < bar);
 
     gen if (a + (b + c)) {
       u8 a = (1 + 2);

@@ -567,7 +567,7 @@ repository:
           - include: "#expr"
   do-while-stmt:
     name: meta.control.do-while.alogic
-    begin: (do)\s*\{
+    begin: (do)\s*(?=\{)
     end: \}\s*(while)\s*\((.*)\);
     beginCaptures:
       1:
