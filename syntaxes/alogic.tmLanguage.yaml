@@ -76,11 +76,11 @@ repository:
     patterns:
       - include: "#param-decl"
       - include: "#field-decl"
-      - include: "#function"
       - include: "#comment"
       - include: "#gen-struct-body"
       - include: "#assert-stmt"
       - include: "#const-decl"
+      - include: "#function"
   gen-struct-body:
     name: meta.control.gen.alogic
     begin: (gen)\s+(if|for)
@@ -137,9 +137,9 @@ repository:
       - include: "#sram-decl"
       - include: "#variable-decl"
       - include: "#fence-block"
-      - include: "#function"
       - include: "#gen-fsm-body"
       - include: "#assert-stmt"
+      - include: "#function"
   gen-fsm-body:
     name: meta.control.gen.alogic
     begin: (gen)\s+(if|for)
@@ -631,7 +631,7 @@ repository:
       - include: "#stmt-block-body"
   gen-for-case:
     name: meta.control.case.gen.alogic
-    begin: (gen)\s+(for)\s+(.*)\s+\{
+    begin: (gen)\s+(for)\s*(.*)\s*\{
     end: \}
     beginCaptures:
       1:
@@ -677,7 +677,7 @@ repository:
           - include: "#stmt-block-body"
   function:
     name: meta.block.function.alogic
-    begin: (?:(static)\s+)?(\w+)\s+(\w+)\((.*)\)
+    begin: (?:(static)\s+)?(\w+)\s+(\w+)\s*\((.*)\)
     end: \}
     beginCaptures:
       1:
