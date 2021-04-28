@@ -145,8 +145,15 @@ fsm cake
   param uint SIZED_DEC = 8'd0123456789;
   param uint UNSPECIFIED_PARAM;
   const uint FREE_NUMBER = 12345;
-  const string FREE_STRING = "string";
+  const string FREE_STRING = "string quotes \"inner quoted string\"";
   const thing_t other = cheese;
+
+  static assert (FOO + BAR)/2 > 4, "(FOO + BAR)/2 too small";
+  static assert (FOO + BAR)/2 > 4, "FOO + BAR too small";
+  static assert (FOO + BAR)/2 > 4, "too small";
+  static assert (FOO + BAR)/2 > 4; // Check (FOO + BAR)/2
+  static assert (FOO + BAR)/2 > 4; // Check
+  static assert ((FOO / 2) + (BAR * 4))/2 > 4; // Check2
 
   in the hood;
   in sync cake_t cake;

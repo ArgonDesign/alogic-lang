@@ -423,7 +423,7 @@ repository:
       - include: "#builtin-ex-invocation"
       - include: "#builtin-zsx-invocation"
       - name: meta.expr.parenthetical.alogic
-        match: \((.+)\)
+        match: \((?<balanced>(?:[^()]*)|(?:\(\g<balanced>*\))*)\)
         captures:
           1:
             patterns:
@@ -920,11 +920,12 @@ repository:
       - include: "#boolean"
   string:
     name: string.quoted.double.alogic
-    begin: '"'
-    end: '"'
-    patterns:
-      - name: constant.character.escape.alogic
-        match: \\.
+    match: (?<!\\)\"(.*?)(?<!\\)\"
+    captures:
+      1:
+        patterns:
+          - name: constant.character.escape.alogic
+            match: \\.
   number:
     patterns:
       - name: constant.numeric.alogic
