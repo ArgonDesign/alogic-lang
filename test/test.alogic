@@ -252,6 +252,7 @@ fsm cake
     } else {
       salmon.write(3);
     }
+    $display("%0d", foo);
 
     if (true) {
 
@@ -356,7 +357,9 @@ fsm cake
 
   cake = new cake();
 
-  in -> cake.in;
+  in -> cake.in;]
+
+  $display("%0d", foo);
 }
 
 network net {
@@ -415,6 +418,8 @@ network net {
   gen if (MY_CONST < 5) {
     sram wire u1 store3[42];
   }
+
+  $display("%0d", foo);
 }
 
 verbatim entity arb {
@@ -441,3 +446,5 @@ sram bar_t store2[ANGLE_STORE_WORDS + @bits(foo)];
 gen if (MY_CONST < 5) {
   sram wire u1 store3[42];
 }
+
+$display("%0d", foo);

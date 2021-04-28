@@ -478,6 +478,15 @@ repository:
       2:
         patterns:
           - include: "#expr"
+  builtin-display-stmt:
+    name: meta.function.invocation.builtin.dollar.display.alogic
+    match: (\$display)\s*\((.*)\)
+    captures:
+      1:
+        name: entity.name.function
+      2:
+        patterns:
+          - include: "#expr"
   builtin-atbits-invocation:
     name: meta.function.invocation.builtin.atbits.alogic
     match: (@bits)\s*\((.*)\)
@@ -749,6 +758,7 @@ repository:
       - include: "#const-decl"
       - include: "#unreachable-stmt"
       - include: "#method-invocation"
+      - include: "#builtin-display-stmt"
   expr-stmt:
     name: meta.stmt.expr.alogic
     match: \b(.+);
