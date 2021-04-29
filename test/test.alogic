@@ -21,6 +21,8 @@ bool my_combinational_func(u8 a, u2 b) {
   assert a != b, "Can't have a == b for some reason";
   if (a < b) {
     return a + b;
+  } else if (a + b > 5) {
+    unreachable "Need to explain what's wrong with a + b > 5";
   } else {
     unreachable;
   }
@@ -326,6 +328,8 @@ fsm cake
       gen for (uint n < NUM_ENGINES_TOTAL) {
         n: req_proc = p_req_in#[n].read();
       }
+      3: unreachable
+        "Bad case for thing, but the comment to explain why is long";
       default: unreachable;
     }
 

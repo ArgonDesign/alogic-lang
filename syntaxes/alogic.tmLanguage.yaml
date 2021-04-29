@@ -837,10 +837,13 @@ repository:
           - include: "#expr"
   unreachable-stmt:
     name: meta.control.unreachable.alogic
-    match: (unreachable);
-    captures:
+    begin: (unreachable)
+    end: ;
+    beginCaptures:
       1:
         name: keyword.control.alogic
+    patterns:
+      - include: "#string"
   goto-stmt:
     name: meta.control.goto.alogic
     match: (goto)\s+(\w+);
