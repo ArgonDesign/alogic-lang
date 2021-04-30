@@ -242,7 +242,7 @@ fsm cake
   {
     uint(@bits(xy4_sb_t) + 1) x4_rightmost_p1 = cfg.angle_cfg.use128 ? 6'd32 : 6'd16;
     const uint(5 + @bits(hood))[4 + @bits(my_var)] foo = 4'd5;
-    foo_t(1, 2) foo = 2;
+    foo_t(1, 2) foo = 2; // this comment can have a ; and nothing cares!
     gen for (uint a < 2) {
       foo_t(1, 2 + 643) foo#[2];
       u5 bar#[a] = 1;

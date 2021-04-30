@@ -320,7 +320,7 @@ repository:
         name: variable.alogic
   const-decl:
     name: meta.const.decl.alogic
-    match: (const)\s+(?:(\w+)|(?:(u?int)\s*\((.*)\)))(?:\s*\[(.*)\])?\s+(\w+)\s*=\s*(.+);
+    match: (const)\s+(?:(\w+)|(?:(u?int)\s*\((.*)\)))(?:\s*\[(.*)\])?\s+(\w+)\s*=\s*(.+?);
     captures:
       1:
         name: keyword.alogic
@@ -341,7 +341,7 @@ repository:
           - include: "#expr"
   param-decl:
     name: meta.const.decl.alogic
-    match: (param)\s+(\w+)\s+(\w+)\s*(?:=\s*(.+))?;
+    match: (param)\s+(\w+)\s+(\w+)\s*(?:=\s*(.+?))?;
     captures:
       1:
         name: keyword.alogic
@@ -356,7 +356,7 @@ repository:
     patterns:
       - include: "#field-decl"
       - name: meta.variable.decl.alogic
-        match: (\w+)(?:\s*\((.*)\))?(?:\s*\[(.*)\])?\s+(\w+)(?:#?\[(.*)])?\s*=\s*(.+);
+        match: (\w+)(?:\s*\((.*)\))?(?:\s*\[(.*)\])?\s+(\w+)(?:#?\[(.*)])?\s*=\s*(.+?);
         captures:
           1:
             name: entity.name.type.alogic
@@ -376,7 +376,7 @@ repository:
               - include: "#expr"
   variable-assignment:
     name: meta.variable.assignment.alogic
-    match: (\w+(?:#?\[.+\])?)\s*=\s*(.*);
+    match: (\w+(?:#?\[.+\])?)\s*=\s*(.*?);
     captures:
       1:
         patterns:
@@ -386,7 +386,7 @@ repository:
           - include: "#expr"
   variable-shorthand-assignment:
     name: meta.variable.shorthandassignment.alogic
-    match: (\w+(?:#?\[.+\])?)\s*(\*=|\/=|%=|\+=|-=|&=|\|=|\^=|>>=|<<=|>>>=|<<<=)\s*(.*);
+    match: (\w+(?:#?\[.+\])?)\s*(\*=|\/=|%=|\+=|-=|&=|\|=|\^=|>>=|<<=|>>>=|<<<=)\s*(.*?);
     captures:
       1:
         patterns:
@@ -758,7 +758,6 @@ repository:
       - include: "#let-stmt"
       - include: "#gen-stmt-body"
       - include: "#assert-stmt"
-      - include: "#expr-stmt"
       - include: "#variable-decl"
       - include: "#variable-assignment"
       - include: "#variable-shorthand-assignment"
@@ -768,16 +767,17 @@ repository:
       - include: "#unreachable-stmt"
       - include: "#method-invocation"
       - include: "#builtin-display-stmt"
+      - include: "#expr-stmt"
   expr-stmt:
     name: meta.stmt.expr.alogic
-    match: \b(.+);
+    match: \b(.+?);
     captures:
       1:
         patterns:
           - include: "#expr"
   for-stmt:
     name: meta.control.for.alogic
-    begin: (for)\s*\((.*;)(.*;)(.*)\)\s*
+    begin: (for)\s*\((.*?;)(.*?;)(.*?)\)\s*
     end: \}
     beginCaptures:
       1:
@@ -822,7 +822,7 @@ repository:
         name: keyword.control.alogic
   return-stmt:
     name: meta.control.return.alogic
-    match: (return)(?:\s+(.+))?;
+    match: (return)(?:\s+(.+?))?;
     captures:
       1:
         name: keyword.control.alogic
@@ -831,7 +831,7 @@ repository:
           - include: "#expr"
   wait-stmt:
     name: meta.control.wait.alogic
-    match: (wait)\s+(.+);
+    match: (wait)\s+(.+?);
     captures:
       1:
         name: keyword.control.alogic
