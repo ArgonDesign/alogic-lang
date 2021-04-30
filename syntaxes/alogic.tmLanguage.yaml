@@ -628,7 +628,7 @@ repository:
       - include: "#stmt"
   case-arm-block:
     name: meta.control.case.arm.alogic
-    begin: "(.+):\\s*{"
+    begin: "(.+):\\s*\\{"
     end: \}
     beginCaptures:
       1:
@@ -640,7 +640,7 @@ repository:
       - include: "#stmt-block-body"
   gen-for-case:
     name: meta.control.case.gen.alogic
-    begin: (gen)\s+(for)\s*(.*)\s*\{
+    begin: (gen)\s+(for)\s*\((.*)\)\s*(?=\{)
     end: \}
     beginCaptures:
       1:
@@ -651,9 +651,12 @@ repository:
         patterns:
           - include: "#expr"
     patterns:
-      - include: "#case-arm-stmt"
-      - include: "#case-arm-block"
-      - include: "#comment"
+      - begin: \{
+        end: .?(?=\})
+        patterns:
+          - include: "#case-arm-block"
+          - include: "#case-arm-stmt"
+          - include: "#comment"
   field-decl:
     name: meta.field.decl.alogic
     match: (\w+)(?:\s*\((.*)\))?(?:\s*\[(.*)\])?\s+(\w+)(?:#?\[(.*)])?;
