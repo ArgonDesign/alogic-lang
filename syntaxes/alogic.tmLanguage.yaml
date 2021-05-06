@@ -44,7 +44,7 @@ repository:
         name: entity.name.type.alogic
   typedef-decl:
     name: meta.typedef.alogic
-    match: (typedef)\s+(\w+)(\(.*\))?\s+(\w+);
+    match: (typedef)\s+(\w+)(?:\((.*)\))?\s+(\w+);
     captures:
       1:
         name: keyword.alogic
@@ -423,9 +423,16 @@ repository:
       - include: "#builtin-ex-invocation"
       - include: "#builtin-zsx-invocation"
       - name: meta.expr.parenthetical.alogic
-        match: \((?<balanced>(?:[^()]*)|(?:\(\g<balanced>*\))*)\)
+        # Note (JDGH): Be careful with what backtracking is allowed in this
+        # group. It's very easy to end up with catastropic backtracking issues
+        # where the editor basically locks up because the syntax highlighting
+        # gets unhappy processing this one regex.
+        match: \(((?<balanced>[^\(\)]*+|\(\g<balanced>\))*)\)
         captures:
           1:
+            patterns:
+              - include: "#expr"
+          2:
             patterns:
               - include: "#expr"
       - include: "#literal"
@@ -973,7 +980,7 @@ repository:
       - include: "#block-comment"
   line-comment:
     name: comment.line.double-slash.alogic
-    match: //.*
+    match: //.*+
   block-comment:
     name: comment.block.alogic
     begin: /\*

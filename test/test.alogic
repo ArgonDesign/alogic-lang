@@ -160,6 +160,17 @@ fsm cake
   const uint FREE_NUMBER = 12345;
   const string FREE_STRING = "string quotes \"inner quoted string\"";
   const thing_t other = cheese;
+  const uint foo = ((1 << @bits(cache_addr_t)) - 1);
+  const uint foo = ((1 << myfun(cache_addr_t)) - 1);
+  const uint foo = ((1 << 5) - 1);
+  const uint foo2 = (((1 + 2)) + (((3 + @bits(foo)))) * 5);
+  const uint foo = 1 + 2 + ((3 * 5) + 5);
+  const uint foo = 1 + 2 + ( (3 * 5) + 5 );
+  const uint foo = (1 + 2) + (15 + (3 * 5) + 5 );
+  const uint foo = (4 + 2);
+  const uint foo = (((( 4 * 3 ))));
+  const uint foo = ( ( 1 << @bits(cache_addr_t)) - (1 - 2));
+  const uint foo = ((1 << myfunc(cache_addr_t)) - 1);
 
   static assert (FOO + BAR)/2 > 4, "(FOO + BAR)/2 too small";
   static assert (FOO + BAR)/2 > 4, "FOO + BAR too small";
@@ -236,6 +247,9 @@ fsm cake
     import bool intra_check_sample(uint(bits) sample);
   }
   import bool intra_check_sample_always(u8 sample);
+
+  typedef uint(cache_bits) cache_addr_t;
+  typedef int(cache_bits+2) cache_signed_addr_t;
 
   /* A long comment */
   void main()
