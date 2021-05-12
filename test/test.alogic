@@ -1,3 +1,13 @@
+////////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 2019-2021 Argon Design Ltd. All rights reserved.
+// This file is covered by the BSD (with attribution) license.
+// See the LICENSE file for the precise wording of the license.
+//
+// DESCRIPTION:
+// Test alogic file for syntax highlighting. Note that this is not intended to
+// compile since certain illegal constructs are deliberately included for test
+// purposes.
+////////////////////////////////////////////////////////////////////////////////
 
 const uint cheese = 4;
 const uint cheese2 = 4u;
@@ -298,6 +308,7 @@ fsm cake
     foo = var[@bits(baz)];
     foo = var[5 + 2 +: MY_CONST];
     foo = var[@bits(baz) +: 16 * 4];
+    bool baz = bar > 9'(foo + 51);
 
     assert x4_rightmost_tmp[(@bits(x4_rightmost_tmp) - 1)] == 0,
           "Top bit of x4_rightmost_tmp must always be zero";
